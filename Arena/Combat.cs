@@ -16,8 +16,10 @@ namespace Arena
             if (monster.Health > 0)
             {
                 //if monster is alive, player does damage
-                ActivityLog.AddToLog(player.Name + " has hit a " + monster.Name + " for 5 damage");
                 monster.Health -= 5; // fake player damage of 5 to monster
+                ActivityLog.AddToLog(player.Name + " has hit a " + monster.Name + " for 5 damage (" + monster.Health + " / " + monster.HealthMax + ")");
+                
+                MonsterAttacks(player, monster, map);// auto hit
             }
 
             if (monster.Health <= 0)
@@ -28,6 +30,17 @@ namespace Arena
             }
 
         }
+
+        public static void MonsterAttacks(Player player, Monster monster, Map map)
+        {
+            player.Health -= 5;
+            ActivityLog.AddToLog(monster.Name + " hits " + player.Name + " for 5 damage.");
+            StatBar.Display(player);
+        }
+
+
+
+
 
     }
 }
