@@ -17,7 +17,7 @@ namespace Arena
 
         private static void Main()
         {
-            
+
 
             Player player = new Player
             {
@@ -26,19 +26,30 @@ namespace Arena
                 Health = 100
             };
 
-            Rat rat = new Rat();
+            Monster monster = new Monster(); // for testing needs moved to generation class
 
-            Monster monster = new Monster
+            switch (random.Next(1, 3))
             {
-                Name = rat.Name,
-                Icon = rat.Icon,
-                HealthMax = random.Next(rat.HealthLow, rat.HealthHigh),
-                WeaponDamageLow = rat.WeaponDamageLow,
-                WeaponDamageHigh = rat.WeaponDamageHigh,
-                Gold = rat.Gold
-            };
-            monster.Health = monster.HealthMax; //look into - should be above but its not registering - move to generate class
+                case 1:
+                    Rat rat = new Rat();
+                    monster.Name = rat.Name;
+                    monster.Icon = rat.Icon;
+                    monster.HealthMax = monster.Health = random.Next(rat.HealthLow, rat.HealthHigh);
+                    monster.WeaponDamageLow = rat.WeaponDamageLow;
+                    monster.WeaponDamageHigh = rat.WeaponDamageHigh;
+                    break;
+                case 2:
+                    Skeleton skeleton = new Skeleton();
+                    monster.Name = skeleton.Name;
+                    monster.Icon = skeleton.Icon;
+                    monster.HealthMax = monster.Health = random.Next(skeleton.HealthLow, skeleton.HealthHigh);
+                    monster.WeaponDamageLow = skeleton.WeaponDamageLow;
+                    monster.WeaponDamageHigh = skeleton.WeaponDamageHigh;
+                    monster.Gold = skeleton.Gold;
+                    break;
+            }
 
+              
 
 
         Console.Title = "Arena";
