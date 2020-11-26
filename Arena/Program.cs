@@ -1,6 +1,7 @@
 ﻿using System;
 using Arena.Characters;
 using Arena.MapGenerator;
+using Arena.Characters.Monsters;
 
 /*
  * Arena
@@ -12,9 +13,11 @@ namespace Arena
 {
     internal static class Program
     {
+        private static readonly Random random = new Random();
 
         private static void Main()
         {
+            
 
             Player player = new Player
             {
@@ -23,18 +26,22 @@ namespace Arena
                 Health = 100
             };
 
+            Rat rat = new Rat();
+
             Monster monster = new Monster
             {
-                Name = "Skeleton",
-                Icon = "S",
-                HealthMax = 50,
-                Health = 15
+                Name = rat.Name,
+                Icon = rat.Icon,
+                HealthMax = random.Next(rat.HealthLow, rat.HealthHigh),
+                WeaponDamageLow = rat.WeaponDamageLow,
+                WeaponDamageHigh = rat.WeaponDamageHigh,
+                Gold = rat.Gold
             };
+            monster.Health = monster.HealthMax; //look into - should be above but its not registering - move to generate class
 
 
 
-
-            Console.Title = "Arena";
+        Console.Title = "Arena";
             Console.SetWindowSize(140, 46); //map will be 110x45, giving 30 spaces on the side and 10 lines below, +1 to prevent scroll on window
             Console.CursorVisible = false; //to hide the cursor
             Console.Clear();

@@ -8,7 +8,7 @@ namespace Arena
 {
     internal static class Combat
     {
-        private static readonly Random random = new Random();
+        //private static readonly Random random = new Random();
 
         public static void PlayerAttacks(Player player, Monster monster, Map map) // remove ??
         {
@@ -37,10 +37,6 @@ namespace Arena
             ActivityLog.AddToLog(monster.Name + " hits " + player.Name + " for 5 damage.");
             StatBar.Display(player);
         }
-
-
-
-
 
     }
 }
