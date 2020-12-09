@@ -34,7 +34,8 @@ namespace Arena
                     Rat rat = new Rat();
                     monster.Name = rat.Name;
                     monster.Icon = rat.Icon;
-                    monster.HealthMax = monster.Health = random.Next(rat.HealthLow, rat.HealthHigh);
+                    //monster.HealthMax = monster.Health = random.Next(rat.HealthLow, rat.HealthHigh);
+                    monster.HealthMax = monster.Health = rat.SetHealth();
                     monster.WeaponDamageLow = rat.WeaponDamageLow;
                     monster.WeaponDamageHigh = rat.WeaponDamageHigh;
                     break;
@@ -42,7 +43,8 @@ namespace Arena
                     Skeleton skeleton = new Skeleton();
                     monster.Name = skeleton.Name;
                     monster.Icon = skeleton.Icon;
-                    monster.HealthMax = monster.Health = random.Next(skeleton.HealthLow, skeleton.HealthHigh);
+                    //monster.HealthMax = monster.Health = random.Next(skeleton.HealthLow, skeleton.HealthHigh);
+                    monster.HealthMax = monster.Health = skeleton.SetHealth();
                     monster.WeaponDamageLow = skeleton.WeaponDamageLow;
                     monster.WeaponDamageHigh = skeleton.WeaponDamageHigh;
                     monster.Gold = skeleton.Gold;
