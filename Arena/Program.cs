@@ -2,6 +2,7 @@
 using Arena.Characters;
 using Arena.MapGenerator;
 using Arena.Characters.Monsters;
+using System.Collections.Generic;
 
 /*
  * Arena
@@ -15,52 +16,13 @@ namespace Arena
     {
         private static readonly Random random = new Random();
 
-        private static void Main()
+        public static void Main()
         {
-
-
-            Player player = new Player
-            {
-                Name = "Tunk",
-                HealthMax = 100,
-                Health = 100
-            };
-
-            Monster monster = new Monster(); // for testing needs moved to generation class
-
-            switch (random.Next(1, 3))
-            {
-                case 1:
-                    Rat rat = new Rat();
-                    monster.Name = rat.Name;
-                    monster.Icon = rat.Icon;
-                    //monster.HealthMax = monster.Health = random.Next(rat.HealthLow, rat.HealthHigh);
-                    monster.HealthMax = monster.Health = rat.SetHealth();
-                    monster.WeaponDamageLow = rat.WeaponDamageLow;
-                    monster.WeaponDamageHigh = rat.WeaponDamageHigh;
-                    break;
-                case 2:
-                    Skeleton skeleton = new Skeleton();
-                    monster.Name = skeleton.Name;
-                    monster.Icon = skeleton.Icon;
-                    //monster.HealthMax = monster.Health = random.Next(skeleton.HealthLow, skeleton.HealthHigh);
-                    monster.HealthMax = monster.Health = skeleton.SetHealth();
-                    monster.WeaponDamageLow = skeleton.WeaponDamageLow;
-                    monster.WeaponDamageHigh = skeleton.WeaponDamageHigh;
-                    monster.Gold = skeleton.Gold;
-                    break;
-            }
-
-              
-
-
-        Console.Title = "Arena";
+            Console.Title = "Arena";
             Console.SetWindowSize(140, 46); //map will be 110x45, giving 30 spaces on the side and 10 lines below, +1 to prevent scroll on window
             Console.CursorVisible = false; //to hide the cursor
             Console.Clear();
 
-            //Console.SetCursorPosition(110, 34);
-            //Console.WriteLine(("").PadLeft(30, '#'));
 
             Map map = new Map();
 
@@ -69,8 +31,53 @@ namespace Arena
 
             map.Create();
 
+            Player player = new Player
+            {
+                Name = "Tunk",
+                HealthMax = 100,
+                Health = 100
+            };
             map.PlacePlayer(player);
-            map.PlaceMonster(monster);
+
+
+
+
+
+            List<Monster> activeMonsters = new List<Monster>();
+
+
+        //public List<Monster> activeMonsters
+        //{
+        //    get { return activeMonsters};
+        //}
+
+            //generate 5 monsters
+            for (int i = 0; i < 5; i++)
+            {
+                activeMonsters.Add(Generate.Monster());
+            }
+
+            //add monsters to map
+            for (int i = 0; i < activeMonsters.Count; i++)
+            {
+                //map.PlaceMonster(activeMonsters[i]);
+
+
+                var (x, y) = map.PlaceMonster(activeMonsters[i]);
+
+                activeMonsters[i].X = x;
+                activeMonsters[i].Y = y;
+            }
+
+            //monsters are added to the map though they are inactive
+            //this may need moved
+
+            //add to map.MovePlayer() to check which monster 
+            //replace 1 with variable
+            if (activeMonsters[1].Y == 2 && activeMonsters[1].X == 2) //2 should be NextTile.X and NextTile.Y 
+            {
+                Combat.PlayerAttacks(player, activeMonsters[1], map);
+            }
 
 
             map.Display();
@@ -87,13 +94,13 @@ namespace Arena
 
             ActivityLog.Display();
 
-            StartGame(player, monster, map);
+            StartGame(player, map, activeMonsters);
 
 
             
         }
 
-        public static void StartGame(Player player, Monster monster, Map map)
+        public static void StartGame(Player player, Map map, List<Monster> activeMonsters)
         {
 
             const bool _keepPlaying = true;
@@ -108,35 +115,35 @@ namespace Arena
                 }
                 if (aInput == ConsoleKey.UpArrow || aInput == ConsoleKey.NumPad8)
                 {
-                    map.MovePlayer("North", player, monster, map);
+                    map.MovePlayer("North", player, map, activeMonsters);
                 }
                 if (aInput == ConsoleKey.DownArrow || aInput == ConsoleKey.NumPad2)
                 {
-                    map.MovePlayer("South", player, monster, map);
+                    map.MovePlayer("South", player, map, activeMonsters);
                 }
                 if (aInput == ConsoleKey.RightArrow || aInput == ConsoleKey.NumPad6)
                 {
-                    map.MovePlayer("East", player, monster, map);
+                    map.MovePlayer("East", player, map, activeMonsters);
                 }
                 if (aInput == ConsoleKey.LeftArrow || aInput == ConsoleKey.NumPad4)
                 {
-                    map.MovePlayer("West", player, monster, map);
+                    map.MovePlayer("West", player, map, activeMonsters);
                 }
                 if (aInput == ConsoleKey.NumPad9)
                 {
-                    map.MovePlayer("NorthEast", player, monster, map);
+                    map.MovePlayer("NorthEast", player, map, activeMonsters);
                 }
                 if (aInput == ConsoleKey.NumPad7)
                 {
-                    map.MovePlayer("NorthWest", player, monster, map);
+                    map.MovePlayer("NorthWest", player, map, activeMonsters);
                 }
                 if (aInput == ConsoleKey.NumPad3)
                 {
-                    map.MovePlayer("SouthEast", player, monster, map);
+                    map.MovePlayer("SouthEast", player, map, activeMonsters);
                 }
                 if (aInput == ConsoleKey.NumPad1)
                 {
-                    map.MovePlayer("SouthWest", player, monster, map);
+                    map.MovePlayer("SouthWest", player, map, activeMonsters);
                 }
                 if (aInput == ConsoleKey.Oem3) // cheat console activation key / for possible cheat codes
                 {
