@@ -31,6 +31,18 @@ namespace Arena
 
             map.Create();
 
+
+            // make at least 4 rooms
+            if (map.NumberOfRooms < 4)
+            {
+                Main();
+            }
+
+            map.CreateHallways();
+
+
+
+
             Player player = new Player
             {
                 Name = "Tunk",
@@ -84,11 +96,11 @@ namespace Arena
 
 
             // for testing
-            for (int i = 0; i < 6; i++)
-            {
-                ActivityLog.AddToLog("log " + i);
-            }
-            ActivityLog.AddToLog("this is the activity / combat log");
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    ActivityLog.AddToLog("log " + i);
+            //}
+            //ActivityLog.AddToLog("this is the activity / combat log");
 
 
 
