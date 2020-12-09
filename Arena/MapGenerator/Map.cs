@@ -34,11 +34,11 @@ namespace Arena.MapGenerator
 
         public void Create()
         {
-            const int RoomHeight = 15;
-            const int RoomWidth = 20;
+            const int RoomHeight = 15; //y
+            const int RoomWidth = 20; //x
 
-            const int RoomPOSX = 10;
-            const int RoomPOSY = 5;
+            const int RoomPOSX = 0;
+            const int RoomPOSY = 0;
 
             rooms[0, 0] = new Room(1, RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
             CreateRoom(RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
@@ -198,7 +198,7 @@ namespace Arena.MapGenerator
         }
 
 
-        public void PlaceMonster(Monster monster)
+        public (int X, int Y) PlaceMonster(Monster monster)
         {
             Random random = new Random();
             int _placed = 0;
@@ -224,6 +224,8 @@ namespace Arena.MapGenerator
 
                 }
             } while (_placed == 0);
+            return (monster.X, monster.Y);
+
         }
 
         public void RemoveMonster(Monster monster)
@@ -249,7 +251,8 @@ namespace Arena.MapGenerator
         //}
 
 
-        public void MovePlayer(string _direction, Player player, Monster monster, Map map)
+        //public void MovePlayer(string _direction, Player player, Monster monster, Map map)
+        public void MovePlayer(string _direction, Player player, Map map, List<Monster> activeMonsters)
         {
             Tile CurrentTile = GameMap[player.X, player.Y];
 
@@ -263,12 +266,30 @@ namespace Arena.MapGenerator
                     NextTile.Icon = PlayerIcon;
                     player.Y--;
                     StatBar.Display(player);
-                    ActivityLog.AddToLog("You move " + _direction + ".");
+                    ActivityLog.AddToLog("You move " + _direction + ".");//! needs to fix space formatting - if you attack then move the attack text will still be visible
                 }
                 else if (NextTile.IsMonster)
                 {
-                    ActivityLog.AddToLog("You attack!");
-                    Combat.PlayerAttacks(player, monster, map);
+                    ActivityLog.AddToLog("You attack!"); //! needs to fix space formatting - see above
+
+                    //for (int i = 0; i < activeMonsters.Count; i++)
+                    //{
+                    //    ActivityLog.AddToLog($"monster {i} - {activeMonsters[i].X}, {activeMonsters[i].Y}");
+                    //}
+
+
+                    //Combat.PlayerAttacks(player, monster, map);
+
+                    for (int i = 0; i < activeMonsters.Count; i++)
+                    {
+                        if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
+                        {
+                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                        }
+                    }
+
+
+
                 }
                 else
                 {
@@ -290,7 +311,13 @@ namespace Arena.MapGenerator
                 else if (NextTile.IsMonster)
                 {
                     ActivityLog.AddToLog("You attack!");
-                    Combat.PlayerAttacks(player, monster, map);
+                    for (int i = 0; i < activeMonsters.Count; i++)
+                    {
+                        if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
+                        {
+                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                        }
+                    }
                 }
                 else
                 {
@@ -312,7 +339,13 @@ namespace Arena.MapGenerator
                 else if (NextTile.IsMonster)
                 {
                     ActivityLog.AddToLog("You attack!");
-                    Combat.PlayerAttacks(player, monster, map);
+                    for (int i = 0; i < activeMonsters.Count; i++)
+                    {
+                        if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
+                        {
+                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                        }
+                    }
                 }
                 else
                 {
@@ -335,7 +368,13 @@ namespace Arena.MapGenerator
                 else if (NextTile.IsMonster)
                 {
                     ActivityLog.AddToLog("You attack!");
-                    Combat.PlayerAttacks(player, monster, map);
+                    for (int i = 0; i < activeMonsters.Count; i++)
+                    {
+                        if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
+                        {
+                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                        }
+                    }
                 }
                 else
                 {
@@ -358,7 +397,13 @@ namespace Arena.MapGenerator
                 else if (NextTile.IsMonster)
                 {
                     ActivityLog.AddToLog("You attack!");
-                    Combat.PlayerAttacks(player, monster, map);
+                    for (int i = 0; i < activeMonsters.Count; i++)
+                    {
+                        if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
+                        {
+                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                        }
+                    }
                 }
                 else
                 {
@@ -381,7 +426,13 @@ namespace Arena.MapGenerator
                 else if (NextTile.IsMonster)
                 {
                     ActivityLog.AddToLog("You attack!");
-                    Combat.PlayerAttacks(player, monster, map);
+                    for (int i = 0; i < activeMonsters.Count; i++)
+                    {
+                        if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
+                        {
+                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                        }
+                    }
                 }
                 else
                 {
@@ -404,7 +455,13 @@ namespace Arena.MapGenerator
                 else if (NextTile.IsMonster)
                 {
                     ActivityLog.AddToLog("You attack!");
-                    Combat.PlayerAttacks(player, monster, map);
+                    for (int i = 0; i < activeMonsters.Count; i++)
+                    {
+                        if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
+                        {
+                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                        }
+                    }
                 }
                 else
                 {
@@ -427,7 +484,13 @@ namespace Arena.MapGenerator
                 else if (NextTile.IsMonster)
                 {
                     ActivityLog.AddToLog("You attack!");
-                    Combat.PlayerAttacks(player, monster, map);
+                    for (int i = 0; i < activeMonsters.Count; i++)
+                    {
+                        if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
+                        {
+                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                        }
+                    }
                 }
                 else
                 {
