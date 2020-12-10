@@ -32,20 +32,20 @@ namespace Arena.MapGenerator
 
         public int NumberOfRooms = 0;
 
+        public void Create() //create 1 room for testing
+        {
+            const int RoomHeight = 20; //y
+            const int RoomWidth = 25; //x
 
-        //public void Create()
-        //{
-        //    const int RoomHeight = 15; //y
-        //    const int RoomWidth = 20; //x
+            const int RoomPOSX = 0;
+            const int RoomPOSY = 0;
 
-        //    const int RoomPOSX = 0;
-        //    const int RoomPOSY = 0;
-
-        //    rooms[0, 0] = new Room(1, RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
-        //    CreateRoom(RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
-        //}
+            rooms[0, 0] = new Room(1, RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
+            CreateRoom(RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
+        }
 
 
+        /*
         public void Create()
         {
             Random random = new Random();
@@ -65,7 +65,7 @@ namespace Arena.MapGenerator
                 rooms[0, 0] = new Room(1, RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
                 CreateRoom(RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
             }
-
+            
 
             buildRoom = random.Next(1, 3);
             if (buildRoom == 1)
@@ -176,6 +176,7 @@ namespace Arena.MapGenerator
                 CreateRoom(RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
             }
         }
+        */
 
 
         public void CreateHallways()

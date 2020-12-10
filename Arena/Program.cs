@@ -32,11 +32,11 @@ namespace Arena
             map.Create();
 
 
-            // make at least 4 rooms
-            if (map.NumberOfRooms < 4)
-            {
-                Main();
-            }
+            //// make at least 4 rooms
+            //if (map.NumberOfRooms < 4)
+            //{
+            //    Main();
+            //}
 
             map.CreateHallways();
 
