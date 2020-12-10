@@ -842,15 +842,15 @@ namespace Arena.MapGenerator
                 else if (NextTile.IsMonster)
                 {
                     ActivityLog.AddToLog("You attack!"); //! needs to fix space formatting - see above
-                    ActivityLog.AddToLog($"NextTile X: {NextTile.X} Y: {NextTile.Y}");
-                    ActivityLog.AddToLog($"Player X: {player.X} Y: {player.Y}");
+                   // ActivityLog.AddToLog($"NextTile X: {NextTile.X} Y: {NextTile.Y}");
+                   // ActivityLog.AddToLog($"Player X: {player.X} Y: {player.Y}");
 
-                    //! NextTile X/Y is by room not entire map
+                    
 
-                    for (int i = 0; i < activeMonsters.Count; i++)
-                    {
-                        ActivityLog.AddToLog($"monster {i}  {activeMonsters[i].Name} - {activeMonsters[i].X}, {activeMonsters[i].Y}");
-                    }
+                    //for (int i = 0; i < activeMonsters.Count; i++)
+                    //{
+                    //    ActivityLog.AddToLog($"monster {i}  {activeMonsters[i].Name} - {activeMonsters[i].X}, {activeMonsters[i].Y}");
+                    //}
 
 
                     //Combat.PlayerAttacks(player, monster, map);
@@ -859,7 +859,6 @@ namespace Arena.MapGenerator
                     {
                         if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
                         {
-                            ActivityLog.AddToLog("IT WORKS!");
                             Combat.PlayerAttacks(player, activeMonsters[i], map);
                         }
                     }
