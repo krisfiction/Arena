@@ -12,7 +12,8 @@ namespace Arena
 
         public static Monster Monster()
         {
-            switch (random.Next(1, 3))
+
+            switch (random.Next(1, 5))
             {
                 case 1:
                     Rat rat = new Rat();
@@ -22,23 +23,17 @@ namespace Arena
                     Skeleton skeleton = new Skeleton();
                     skeleton.HealthMax = skeleton.Health = skeleton.SetHealth();
                     return skeleton;
+                case 3:
+                    Goblin goblin = new Goblin();
+                    goblin.HealthMax = goblin.Health = goblin.SetHealth();
+                    return goblin;
+                case 4:
+                    Troll troll = new Troll();
+                    troll.HealthMax = troll.Health = troll.SetHealth();
+                    return troll;
             }
 
             return null;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
