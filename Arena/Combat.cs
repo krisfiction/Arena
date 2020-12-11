@@ -10,7 +10,7 @@ namespace Arena
     {
         //private static readonly Random random = new Random();
 
-        public static void PlayerAttacks(Player player, Monster monster, Map map) // remove ??
+        public static bool PlayerAttacks(Player player, Monster monster, Map map) // remove ??
         {
             
             if (monster.Health > 0)
@@ -27,7 +27,9 @@ namespace Arena
                 //if monster is dead, tell player and remove monster from map
                 ActivityLog.AddToLog(player.Name + " has killed a " + monster.Name);
                 map.RemoveMonster(monster);
+                return true;
             }
+            return false;
 
         }
 

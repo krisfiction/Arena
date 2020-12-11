@@ -32,7 +32,7 @@ namespace Arena.MapGenerator
 
         public int NumberOfRooms = 0;
 
-        public void Create() //create 1 room for testing
+        public void CreateOneRoom() //create 1 room for testing
         {
             const int RoomHeight = 20; //y
             const int RoomWidth = 25; //x
@@ -45,7 +45,7 @@ namespace Arena.MapGenerator
         }
 
 
-        /*
+        
         public void Create()
         {
             Random random = new Random();
@@ -176,7 +176,7 @@ namespace Arena.MapGenerator
                 CreateRoom(RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
             }
         }
-        */
+        
 
 
         public void CreateHallways()
@@ -753,6 +753,7 @@ namespace Arena.MapGenerator
                 if (_iswalkable && _placed == 0 && !_ishallway)
                 {
                     CurrentTile.Icon = PlayerIcon;
+                    CurrentTile.IsWalkable = false;
 
                     player.X = _randX;
                     player.Y = _randY;
@@ -835,7 +836,9 @@ namespace Arena.MapGenerator
                 if (NextTile.IsWalkable)
                 {
                     CurrentTile.Icon = FloorIcon;
+                    CurrentTile.IsWalkable = true;
                     NextTile.Icon = PlayerIcon;
+                    NextTile.IsWalkable = false;
                     player.Y--;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");//! needs to fix space formatting - if you attack then move the attack text will still be visible
@@ -860,7 +863,10 @@ namespace Arena.MapGenerator
                     {
                         if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
                         {
-                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                            if (Combat.PlayerAttacks(player, activeMonsters[i], map)) //if return true
+                            {
+                                activeMonsters.RemoveAt(i);
+                            }
                         }
                     }
 
@@ -879,7 +885,9 @@ namespace Arena.MapGenerator
                 if (NextTile.IsWalkable)
                 {
                     CurrentTile.Icon = FloorIcon;
+                    CurrentTile.IsWalkable = true;
                     NextTile.Icon = PlayerIcon;
+                    NextTile.IsWalkable = false;
                     player.Y++;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
@@ -891,7 +899,10 @@ namespace Arena.MapGenerator
                     {
                         if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
                         {
-                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                            if (Combat.PlayerAttacks(player, activeMonsters[i], map)) //if return true
+                            {
+                                activeMonsters.RemoveAt(i);
+                            }
                         }
                     }
                 }
@@ -907,7 +918,9 @@ namespace Arena.MapGenerator
                 if (NextTile.IsWalkable)
                 {
                     CurrentTile.Icon = FloorIcon;
+                    CurrentTile.IsWalkable = true;
                     NextTile.Icon = PlayerIcon;
+                    NextTile.IsWalkable = false;
                     player.X--;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
@@ -919,7 +932,10 @@ namespace Arena.MapGenerator
                     {
                         if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
                         {
-                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                            if (Combat.PlayerAttacks(player, activeMonsters[i], map)) //if return true
+                            {
+                                activeMonsters.RemoveAt(i);
+                            }
                         }
                     }
                 }
@@ -936,7 +952,9 @@ namespace Arena.MapGenerator
                 if (NextTile.IsWalkable)
                 {
                     CurrentTile.Icon = FloorIcon;
+                    CurrentTile.IsWalkable = true;
                     NextTile.Icon = PlayerIcon;
+                    NextTile.IsWalkable = false;
                     player.X++;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
@@ -948,7 +966,10 @@ namespace Arena.MapGenerator
                     {
                         if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
                         {
-                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                            if (Combat.PlayerAttacks(player, activeMonsters[i], map)) //if return true
+                            {
+                                activeMonsters.RemoveAt(i);
+                            }
                         }
                     }
                 }
@@ -964,7 +985,9 @@ namespace Arena.MapGenerator
                 if (NextTile.IsWalkable)
                 {
                     CurrentTile.Icon = FloorIcon;
+                    CurrentTile.IsWalkable = true;
                     NextTile.Icon = PlayerIcon;
+                    NextTile.IsWalkable = false;
                     player.X--;
                     player.Y--;
                     StatBar.Display(player);
@@ -977,7 +1000,10 @@ namespace Arena.MapGenerator
                     {
                         if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
                         {
-                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                            if (Combat.PlayerAttacks(player, activeMonsters[i], map)) //if return true
+                            {
+                                activeMonsters.RemoveAt(i);
+                            }
                         }
                     }
                 }
@@ -993,7 +1019,9 @@ namespace Arena.MapGenerator
                 if (NextTile.IsWalkable)
                 {
                     CurrentTile.Icon = FloorIcon;
+                    CurrentTile.IsWalkable = true;
                     NextTile.Icon = PlayerIcon;
+                    NextTile.IsWalkable = false;
                     player.X++;
                     player.Y--;
                     StatBar.Display(player);
@@ -1006,7 +1034,10 @@ namespace Arena.MapGenerator
                     {
                         if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
                         {
-                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                            if (Combat.PlayerAttacks(player, activeMonsters[i], map)) //if return true
+                            {
+                                activeMonsters.RemoveAt(i);
+                            }
                         }
                     }
                 }
@@ -1022,7 +1053,9 @@ namespace Arena.MapGenerator
                 if (NextTile.IsWalkable)
                 {
                     CurrentTile.Icon = FloorIcon;
+                    CurrentTile.IsWalkable = true;
                     NextTile.Icon = PlayerIcon;
+                    NextTile.IsWalkable = false;
                     player.X--;
                     player.Y++;
                     StatBar.Display(player);
@@ -1035,7 +1068,10 @@ namespace Arena.MapGenerator
                     {
                         if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
                         {
-                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                            if (Combat.PlayerAttacks(player, activeMonsters[i], map)) //if return true
+                            {
+                                activeMonsters.RemoveAt(i);
+                            }
                         }
                     }
                 }
@@ -1051,7 +1087,9 @@ namespace Arena.MapGenerator
                 if (NextTile.IsWalkable)
                 {
                     CurrentTile.Icon = FloorIcon;
+                    CurrentTile.IsWalkable = true;
                     NextTile.Icon = PlayerIcon;
+                    NextTile.IsWalkable = false;
                     player.X++;
                     player.Y++;
                     StatBar.Display(player);
@@ -1064,7 +1102,10 @@ namespace Arena.MapGenerator
                     {
                         if (activeMonsters[i].Y == NextTile.Y && activeMonsters[i].X == NextTile.X)
                         {
-                            Combat.PlayerAttacks(player, activeMonsters[i], map);
+                            if (Combat.PlayerAttacks(player, activeMonsters[i], map)) //if return true
+                            {
+                                activeMonsters.RemoveAt(i);
+                            }
                         }
                     }
                 }
@@ -1074,5 +1115,180 @@ namespace Arena.MapGenerator
                 }
             }
         }
+
+
+        public void MoveMonster(Map map, List<Monster> activeMonsters)
+        {
+            //cycle through monster list
+            //get monster X/Y cords
+            //random X and Y
+            //check if next tile is walkable
+            //move monster
+
+            //? random to have monster not move
+
+            Random random = new Random();
+
+
+            int _randX;
+            int _randY;
+
+            foreach (Monster monster in activeMonsters)
+            {
+                //! make random chance if monster moves
+
+                Tile CurrentTile = GameMap[monster.X, monster.Y];
+
+                _randX = random.Next(1, 4);
+                _randY = random.Next(1, 4);
+                // 1 = 0
+                // 2 = +1
+                // 3 = -1
+
+                if (_randX == 3 && _randY == 3) // northeast
+                {
+                    Tile NextTile = (Tile)GameMap[monster.X - 1, monster.Y - 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsMonster = false;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = monster.Icon;
+                        NextTile.IsMonster = true;
+                        NextTile.IsWalkable = false;
+
+                        monster.X--;
+                        monster.Y--;
+
+                        
+                    }
+                }
+                else if (_randX == 1 && _randY == 3) // north
+                {
+                    Tile NextTile = (Tile)GameMap[monster.X, monster.Y - 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsMonster = false;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = monster.Icon;
+                        NextTile.IsMonster = true;
+                        NextTile.IsWalkable = false;
+
+                        //monster.X++;
+                        monster.Y--;
+                    }
+                }
+                else if (_randX == 2 && _randY == 3) // northwest
+                {
+                    Tile NextTile = (Tile)GameMap[monster.X + 1, monster.Y - 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsMonster = false;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = monster.Icon;
+                        NextTile.IsMonster = true;
+                        NextTile.IsWalkable = false;
+
+                        monster.X++;
+                        monster.Y--;
+                    }
+                }
+                else if (_randX == 3 && _randY == 1) // west
+                {
+                    Tile NextTile = (Tile)GameMap[monster.X - 1, monster.Y];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsMonster = false;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = monster.Icon;
+                        NextTile.IsMonster = true;
+                        NextTile.IsWalkable = false;
+
+                        monster.X--;
+                        //monster.Y--;
+                    }
+                }
+                // 0, 0 do nothing
+                else if (_randX == 3 && _randY == 1) // east
+                {
+                    Tile NextTile = (Tile)GameMap[monster.X - 1, monster.Y];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsMonster = false;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = monster.Icon;
+                        NextTile.IsMonster = true;
+                        NextTile.IsWalkable = false;
+
+                        monster.X--;
+                        //monster.Y--;
+                    }
+                }
+                else if (_randX == 3 && _randY == 2) // southwest
+                {
+                    Tile NextTile = (Tile)GameMap[monster.X - 1, monster.Y + 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsMonster = false;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = monster.Icon;
+                        NextTile.IsMonster = true;
+                        NextTile.IsWalkable = false;
+
+                        monster.X--;
+                        monster.Y++;
+                    }
+                }
+                else if (_randX == 1 && _randY == 2) // south
+                {
+                    Tile NextTile = (Tile)GameMap[monster.X, monster.Y + 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsMonster = false;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = monster.Icon;
+                        NextTile.IsMonster = true;
+                        NextTile.IsWalkable = false;
+
+                        //monster.X--;
+                        monster.Y++;
+                    }
+                }
+                else if (_randX == 2 && _randY == 2) // southeast
+                {
+                    Tile NextTile = (Tile)GameMap[monster.X + 1, monster.Y + 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsMonster = false;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = monster.Icon;
+                        NextTile.IsMonster = true;
+                        NextTile.IsWalkable = false;
+
+                        monster.X++;
+                        monster.Y++;
+                    }
+                }
+
+
+
+            }
+        }
     }
 }
+//! make is next tile walkable a method - return true/false
