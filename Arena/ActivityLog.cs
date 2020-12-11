@@ -10,7 +10,7 @@ namespace Arena
 
         public static void AddToLog(string _input)
         {
-            Log.Add(_input + "                              "); //may need to adjust blank space or even find a different approach
+            Log.Add(_input + "                                                "); //may need to adjust blank space or even find a different approach
         }
 
         public static void ClearLog()
@@ -22,16 +22,14 @@ namespace Arena
         {
             if (Log.Count > 10)
             {
-                int i;
-                for (i = Log.Count - 10; i < Log.Count; i++)
+                for (int i = Log.Count - 10; i < Log.Count; i++)
                 {
                     Console.WriteLine(Log[i]);
                 }
             }
             else
             {
-                int i;
-                for (i = 0; i <= Log.Count - 1; i++)
+                for (int i = 0; i <= Log.Count - 1; i++)
                 {
                     Console.WriteLine(Log[i]);
                 }

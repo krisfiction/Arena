@@ -14,8 +14,6 @@ namespace Arena
 {
     internal static class Program
     {
-        private static readonly Random random = new Random();
-
         public static void Main()
         {
             Console.Title = "Arena";
@@ -29,11 +27,11 @@ namespace Arena
             map.FillMap();
             map.FillRooms();
 
-            //map.Create();
+            //create 1 room or create entire map
             map.CreateOneRoom();
-
-
-            //// make at least 4 rooms
+            //map.Create();
+            
+            // make at least 4 rooms
             //if (map.NumberOfRooms < 4)
             //{
             //    Main();
@@ -58,12 +56,6 @@ namespace Arena
 
             List<Monster> activeMonsters = new List<Monster>();
 
-
-        //public List<Monster> activeMonsters
-        //{
-        //    get { return activeMonsters};
-        //}
-
             //generate 5 monsters
             for (int i = 0; i < 5; i++)
             {
@@ -73,35 +65,22 @@ namespace Arena
             //add monsters to map
             for (int i = 0; i < activeMonsters.Count; i++)
             {
-                //map.PlaceMonster(activeMonsters[i]);
-
-
                 var (x, y) = map.PlaceMonster(activeMonsters[i]);
 
                 activeMonsters[i].X = x;
                 activeMonsters[i].Y = y;
             }
-
-            //monsters are added to the map though they are inactive
-            //this may need moved
-
-            //add to map.MovePlayer() to check which monster 
-            //replace 1 with variable
-            if (activeMonsters[1].Y == 2 && activeMonsters[1].X == 2) //2 should be NextTile.X and NextTile.Y 
-            {
-                Combat.PlayerAttacks(player, activeMonsters[1], map);
-            }
-
+            
 
             map.Display();
 
 
-            // for testing
-            //for (int i = 0; i < 6; i++)
-            //{
-            //    ActivityLog.AddToLog("log " + i);
-            //}
-            //ActivityLog.AddToLog("this is the activity / combat log");
+            //for testing to fill log with text
+            for (int i = 0; i < 6; i++)
+            {
+                ActivityLog.AddToLog("log " + i);
+            }
+            ActivityLog.AddToLog("this is the activity / combat log");
 
 
 
