@@ -1060,141 +1060,33 @@ namespace Arena.MapGenerator
 
         public void MoveMonster(Map map, List<Monster> activeMonsters)
         {
-            //cycle through monster list
-            //get monster X/Y cords
-            //random X and Y
-            //check if next tile is walkable
-            //move monster
-
-            //? random to have monster not move
+            //? rename RandomMoveMonster() 
+            //? recreate MoveMonster(current-pos, next-pos)
 
             Random random = new Random();
-
 
             int _randX;
             int _randY;
 
             foreach (Monster monster in activeMonsters)
             {
-                //! make random chance if monster moves
+                //! make random chance if monster moves or leave at random 0,0
 
                 Tile CurrentTile = GameMap[monster.X, monster.Y];
 
-                _randX = random.Next(1, 4); //! try random.Next(-1,2) then just pass this variable
-                _randY = random.Next(1, 4);
-                // 1 = 0
-                // 2 = +1
-                // 3 = -1
+                _randX = random.Next(-1, 2);
+                _randY = random.Next(-1, 2);
 
-                if (_randX == 3 && _randY == 3) // northeast
+                Tile NextTile = (Tile)GameMap[monster.X + _randX, monster.Y + _randY];
+
+                if (NextTile.IsWalkable)
                 {
-                    Tile NextTile = (Tile)GameMap[monster.X - 1, monster.Y - 1];
+                    ProcessMonsterTile(CurrentTile, NextTile, monster);
 
-                    if (NextTile.IsWalkable)
-                    {
-                        ProcessMonsterTile(CurrentTile, NextTile, monster);
-
-                        monster.X--;
-                        monster.Y--;
-
-                        
-                    }
-                }
-                else if (_randX == 1 && _randY == 3) // north
-                {
-                    Tile NextTile = (Tile)GameMap[monster.X, monster.Y - 1];
-
-                    if (NextTile.IsWalkable)
-                    {
-                        ProcessMonsterTile(CurrentTile, NextTile, monster);
-
-                        //monster.X++;
-                        monster.Y--;
-                    }
-                }
-                else if (_randX == 2 && _randY == 3) // northwest
-                {
-                    Tile NextTile = (Tile)GameMap[monster.X + 1, monster.Y - 1];
-
-                    if (NextTile.IsWalkable)
-                    {
-                        ProcessMonsterTile(CurrentTile, NextTile, monster);
-
-                        monster.X++;
-                        monster.Y--;
-                    }
-                }
-                else if (_randX == 3 && _randY == 1) // west
-                {
-                    Tile NextTile = (Tile)GameMap[monster.X - 1, monster.Y];
-
-                    if (NextTile.IsWalkable)
-                    {
-                        ProcessMonsterTile(CurrentTile, NextTile, monster);
-
-                        monster.X--;
-                        //monster.Y--;
-                    }
-                }
-                // 0, 0 do nothing
-                else if (_randX == 3 && _randY == 1) // east
-                {
-                    Tile NextTile = (Tile)GameMap[monster.X - 1, monster.Y];
-
-                    if (NextTile.IsWalkable)
-                    {
-                        ProcessMonsterTile(CurrentTile, NextTile, monster);
-
-                        monster.X--;
-                        //monster.Y--;
-                    }
-                }
-                else if (_randX == 3 && _randY == 2) // southwest
-                {
-                    Tile NextTile = (Tile)GameMap[monster.X - 1, monster.Y + 1];
-
-                    if (NextTile.IsWalkable)
-                    {
-                        ProcessMonsterTile(CurrentTile, NextTile, monster);
-
-                        monster.X--;
-                        monster.Y++;
-                    }
-                }
-                else if (_randX == 1 && _randY == 2) // south
-                {
-                    Tile NextTile = (Tile)GameMap[monster.X, monster.Y + 1];
-
-                    if (NextTile.IsWalkable)
-                    {
-                        ProcessMonsterTile(CurrentTile, NextTile, monster);
-
-                        //monster.X--;
-                        monster.Y++;
-                    }
-                }
-                else if (_randX == 2 && _randY == 2) // southeast
-                {
-                    Tile NextTile = (Tile)GameMap[monster.X + 1, monster.Y + 1];
-
-                    if (NextTile.IsWalkable)
-                    {
-                        //! moved to ProcessMonsterTile()
-                        //CurrentTile.Icon = FloorIcon;
-                        //CurrentTile.IsMonster = false;
-                        //CurrentTile.IsWalkable = true;
-                        //NextTile.Icon = monster.Icon;
-                        //NextTile.IsMonster = true;
-                        //NextTile.IsWalkable = false;
-
-                        ProcessMonsterTile(CurrentTile, NextTile, monster);
-
-                        monster.X++;
-                        monster.Y++;
-                    }
+                    monster.X += _randX;
+                    monster.Y += _randY;
                 }
             }
-
 
             // change tile stats when a monster moves, MoveMonster()
             void ProcessMonsterTile(Tile CurrentTile, Tile NextTile, Monster monster)
@@ -1209,4 +1101,3 @@ namespace Arena.MapGenerator
         }
     }
 }
-//! make is next tile walkable a method - return true/false

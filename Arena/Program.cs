@@ -70,17 +70,22 @@ namespace Arena
                 activeMonsters[i].X = x;
                 activeMonsters[i].Y = y;
             }
-            
+
+            //testing - display monsters with X,Y cords
+            //for (int i = 0; i < activeMonsters.Count; i++)
+            //{
+            //    ActivityLog.AddToLog($"{i}) {activeMonsters[i].Name} X: {activeMonsters[i].X} Y:  {activeMonsters[i].Y}");
+            //}
 
             map.Display();
 
 
             //for testing to fill log with text
-            for (int i = 0; i < 6; i++)
-            {
-                ActivityLog.AddToLog("log " + i);
-            }
-            ActivityLog.AddToLog("this is the activity / combat log");
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    ActivityLog.AddToLog("log " + i);
+            //}
+            //ActivityLog.AddToLog("this is the activity / combat log");
 
 
 
@@ -164,11 +169,18 @@ namespace Arena
                 {
                     ActivityLog.AddToLog("cheater!");
                 }
+
+                //testing
+                for (int i = 0; i < activeMonsters.Count; i++)
+                {
+                    ActivityLog.AddToLog($"{i, 2}) {activeMonsters[i].Name, -10} X: {activeMonsters[i].X, 2} Y: {activeMonsters[i].Y, 2}");
+                }
+
+
                 map.Display();
                 ActivityLog.Display();
             } while (_keepPlaying);
 
         }
-
     }
 }
