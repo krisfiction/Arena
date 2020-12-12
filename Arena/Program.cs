@@ -30,7 +30,7 @@ namespace Arena
             //create 1 room or create entire map
             map.CreateOneRoom();
             //map.Create();
-            
+
             // make at least 4 rooms
             //if (map.NumberOfRooms < 4)
             //{
@@ -101,50 +101,64 @@ namespace Arena
                 ConsoleKey aInput = Console.ReadKey(true).Key; //true hides input
                 if (aInput == ConsoleKey.F5) //reload for testing
                 {
-                    //Array.Clear(map.GameMap, 0, map.GameMap.Length);
                     ActivityLog.ClearLog();
                     Main();
                 }
                 if (aInput == ConsoleKey.UpArrow || aInput == ConsoleKey.NumPad8)
                 {
-                    map.MovePlayer("North", player, map, activeMonsters);
-
-                    map.MoveMonster(map, activeMonsters);
+                    if (map.MovePlayer("North", player, map, activeMonsters))
+                    {
+                        map.MoveMonster(map, activeMonsters);
+                    }
                 }
                 if (aInput == ConsoleKey.DownArrow || aInput == ConsoleKey.NumPad2)
                 {
-                    map.MovePlayer("South", player, map, activeMonsters);
-                    map.MoveMonster(map, activeMonsters);
+                    if (map.MovePlayer("South", player, map, activeMonsters))
+                    {
+                        map.MoveMonster(map, activeMonsters);
+                    }
                 }
                 if (aInput == ConsoleKey.RightArrow || aInput == ConsoleKey.NumPad6)
                 {
-                    map.MovePlayer("East", player, map, activeMonsters);
-                    map.MoveMonster(map, activeMonsters);
+                    if (map.MovePlayer("East", player, map, activeMonsters))
+                    {
+                        map.MoveMonster(map, activeMonsters);
+                    }
                 }
                 if (aInput == ConsoleKey.LeftArrow || aInput == ConsoleKey.NumPad4)
                 {
-                    map.MovePlayer("West", player, map, activeMonsters);
-                    map.MoveMonster(map, activeMonsters);
+                    if (map.MovePlayer("West", player, map, activeMonsters))
+                    {
+                        map.MoveMonster(map, activeMonsters);
+                    }
                 }
                 if (aInput == ConsoleKey.NumPad9)
                 {
-                    map.MovePlayer("NorthEast", player, map, activeMonsters);
-                    map.MoveMonster(map, activeMonsters);
+                    if (map.MovePlayer("NorthEast", player, map, activeMonsters))
+                    {
+                        map.MoveMonster(map, activeMonsters);
+                    }
                 }
                 if (aInput == ConsoleKey.NumPad7)
                 {
-                    map.MovePlayer("NorthWest", player, map, activeMonsters);
-                    map.MoveMonster(map, activeMonsters);
+                    if (map.MovePlayer("NorthWest", player, map, activeMonsters))
+                    {
+                        map.MoveMonster(map, activeMonsters);
+                    }
                 }
                 if (aInput == ConsoleKey.NumPad3)
                 {
-                    map.MovePlayer("SouthEast", player, map, activeMonsters);
-                    map.MoveMonster(map, activeMonsters);
+                    if (map.MovePlayer("SouthEast", player, map, activeMonsters))
+                    {
+                        map.MoveMonster(map, activeMonsters);
+                    }
                 }
                 if (aInput == ConsoleKey.NumPad1)
                 {
-                    map.MovePlayer("SouthWest", player, map, activeMonsters);
-                    map.MoveMonster(map, activeMonsters);
+                    if (map.MovePlayer("SouthWest", player, map, activeMonsters))
+                    {
+                        map.MoveMonster(map, activeMonsters);
+                    }
                 }
                 if (aInput == ConsoleKey.Oem3) // cheat console activation key / for possible cheat codes
                 {

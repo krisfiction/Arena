@@ -820,7 +820,7 @@ namespace Arena.MapGenerator
 
         
 
-        public void MovePlayer(string _direction, Player player, Map map, List<Monster> activeMonsters)
+        public bool MovePlayer(string _direction, Player player, Map map, List<Monster> activeMonsters)
         {
             //! door is being over written
 
@@ -839,16 +839,20 @@ namespace Arena.MapGenerator
                     player.Y--;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");//! needs to fix space formatting - if you attack then move the attack text will still be visible
+                    return true;
                 }
                 else if (NextTile.IsMonster)
                 {
                     NextTileIsMonster(NextTile, player, map, activeMonsters);
+                    return true;
                 }
                 else
                 {
                     ActivityLog.AddToLog("You can't move that way.");
+                    return false;
                 }
             }
+            
             if (_direction == "South")
             {
                 Tile NextTile = GameMap[player.X, player.Y + 1];
@@ -862,14 +866,17 @@ namespace Arena.MapGenerator
                     player.Y++;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
+                    return true;
                 }
                 else if (NextTile.IsMonster)
                 {
                     NextTileIsMonster(NextTile, player, map, activeMonsters);
+                    return true;
                 }
                 else
                 {
                     ActivityLog.AddToLog("You can't move that way.");
+                    return false;
                 }
             }
             if (_direction == "West")
@@ -885,14 +892,17 @@ namespace Arena.MapGenerator
                     player.X--;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
+                    return true;
                 }
                 else if (NextTile.IsMonster)
                 {
                     NextTileIsMonster(NextTile, player, map, activeMonsters);
+                    return true;
                 }
                 else
                 {
                     ActivityLog.AddToLog("You can't move that way.");
+                    return false;
                 }
             }
             if (_direction == "East")
@@ -909,14 +919,17 @@ namespace Arena.MapGenerator
                     player.X++;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
+                    return true;
                 }
                 else if (NextTile.IsMonster)
                 {
                     NextTileIsMonster(NextTile, player, map, activeMonsters);
+                    return true;
                 }
                 else
                 {
                     ActivityLog.AddToLog("You can't move that way.");
+                    return false;
                 }
             }
             if (_direction == "NorthWest")
@@ -933,14 +946,17 @@ namespace Arena.MapGenerator
                     player.Y--;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
+                    return true;
                 }
                 else if (NextTile.IsMonster)
                 {
                     NextTileIsMonster(NextTile, player, map, activeMonsters);
+                    return true;
                 }
                 else
                 {
                     ActivityLog.AddToLog("You can't move that way.");
+                    return false;
                 }
             }
             if (_direction == "NorthEast")
@@ -957,14 +973,17 @@ namespace Arena.MapGenerator
                     player.Y--;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
+                    return true;
                 }
                 else if (NextTile.IsMonster)
                 {
                     NextTileIsMonster(NextTile, player, map, activeMonsters);
+                    return true;
                 }
                 else
                 {
                     ActivityLog.AddToLog("You can't move that way.");
+                    return false;
                 }
             }
             if (_direction == "SouthWest")
@@ -981,14 +1000,17 @@ namespace Arena.MapGenerator
                     player.Y++;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
+                    return true;
                 }
                 else if (NextTile.IsMonster)
                 {
                     NextTileIsMonster(NextTile, player, map, activeMonsters);
+                    return true;
                 }
                 else
                 {
                     ActivityLog.AddToLog("You can't move that way.");
+                    return false;
                 }
             }
             if (_direction == "SouthEast")
@@ -1005,16 +1027,20 @@ namespace Arena.MapGenerator
                     player.Y++;
                     StatBar.Display(player);
                     ActivityLog.AddToLog("You move " + _direction + ".");
+                    return true;
                 }
                 else if (NextTile.IsMonster)
                 {
                     NextTileIsMonster(NextTile, player, map, activeMonsters);
+                    return true;
                 }
                 else
                 {
                     ActivityLog.AddToLog("You can't move that way.");
+                    return false;
                 }
             }
+            return false;
         }
 
         private void NextTileIsMonster(Tile NextTile, Player player, Map map, List<Monster> activeMonsters)
@@ -1054,7 +1080,7 @@ namespace Arena.MapGenerator
 
                 Tile CurrentTile = GameMap[monster.X, monster.Y];
 
-                _randX = random.Next(1, 4);
+                _randX = random.Next(1, 4); //! try random.Next(-1,2) then just pass this variable
                 _randY = random.Next(1, 4);
                 // 1 = 0
                 // 2 = +1
