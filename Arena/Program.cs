@@ -3,6 +3,7 @@ using Arena.Characters;
 using Arena.MapGenerator;
 using Arena.Characters.Monsters;
 using System.Collections.Generic;
+using Arena.Generator;
 
 /*
  * Arena
@@ -60,6 +61,8 @@ namespace Arena
             for (int i = 0; i < 5; i++)
             {
                 activeMonsters.Add(Generate.Monster());
+
+                
             }
 
             //add monsters to map
