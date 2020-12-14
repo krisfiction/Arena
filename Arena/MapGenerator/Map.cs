@@ -825,222 +825,187 @@ namespace Arena.MapGenerator
             //! door is being over written
 
             Tile CurrentTile = GameMap[player.X, player.Y];
+            Tile NextTile;
 
-            if (_direction == "North")
+            switch (_direction)
             {
-                Tile NextTile = GameMap[player.X, player.Y - 1];
+                case "North":
+                    NextTile = GameMap[player.X, player.Y - 1];
 
-                if (NextTile.IsWalkable)
-                {
-                    CurrentTile.Icon = FloorIcon;
-                    CurrentTile.IsWalkable = true;
-                    NextTile.Icon = PlayerIcon;
-                    NextTile.IsWalkable = false;
-                    player.Y--;
-                    StatBar.Display(player);
-                    ActivityLog.AddToLog("You move " + _direction + ".");//! needs to fix space formatting - if you attack then move the attack text will still be visible
-                    return true;
-                }
-                else if (NextTile.IsMonster)
-                {
-                    NextTileIsMonster(NextTile, player, map, activeMonsters);
-                    return true;
-                }
-                else
-                {
-                    ActivityLog.AddToLog("You can't move that way.");
-                    return false;
-                }
-            }
-            
-            if (_direction == "South")
-            {
-                Tile NextTile = GameMap[player.X, player.Y + 1];
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = PlayerIcon;
+                        NextTile.IsWalkable = false;
+                        player.Y--;
+                        StatBar.Display(player);
+                        ActivityLog.AddToLog("You move " + _direction + ".");
+                        return true;
+                    }
+                    else if (NextTile.IsMonster)
+                    {
+                        NextTileIsMonster(NextTile, player, map, activeMonsters);
+                        return true;
+                    }
+                    break;
 
-                if (NextTile.IsWalkable)
-                {
-                    CurrentTile.Icon = FloorIcon;
-                    CurrentTile.IsWalkable = true;
-                    NextTile.Icon = PlayerIcon;
-                    NextTile.IsWalkable = false;
-                    player.Y++;
-                    StatBar.Display(player);
-                    ActivityLog.AddToLog("You move " + _direction + ".");
-                    return true;
-                }
-                else if (NextTile.IsMonster)
-                {
-                    NextTileIsMonster(NextTile, player, map, activeMonsters);
-                    return true;
-                }
-                else
-                {
-                    ActivityLog.AddToLog("You can't move that way.");
-                    return false;
-                }
-            }
-            if (_direction == "West")
-            {
-                Tile NextTile = (Tile)GameMap[player.X - 1, player.Y];
+                case "South":
+                    NextTile = GameMap[player.X, player.Y + 1];
 
-                if (NextTile.IsWalkable)
-                {
-                    CurrentTile.Icon = FloorIcon;
-                    CurrentTile.IsWalkable = true;
-                    NextTile.Icon = PlayerIcon;
-                    NextTile.IsWalkable = false;
-                    player.X--;
-                    StatBar.Display(player);
-                    ActivityLog.AddToLog("You move " + _direction + ".");
-                    return true;
-                }
-                else if (NextTile.IsMonster)
-                {
-                    NextTileIsMonster(NextTile, player, map, activeMonsters);
-                    return true;
-                }
-                else
-                {
-                    ActivityLog.AddToLog("You can't move that way.");
-                    return false;
-                }
-            }
-            if (_direction == "East")
-            {
-                Tile NextTile = (Tile)GameMap[player.X + 1, player.Y];
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = PlayerIcon;
+                        NextTile.IsWalkable = false;
+                        player.Y++;
+                        StatBar.Display(player);
+                        ActivityLog.AddToLog("You move " + _direction + ".");
+                        return true;
+                    }
+                    else if (NextTile.IsMonster)
+                    {
+                        NextTileIsMonster(NextTile, player, map, activeMonsters);
+                        return true;
+                    }
+                    break;
 
-                
-                if (NextTile.IsWalkable)
-                {
-                    CurrentTile.Icon = FloorIcon;
-                    CurrentTile.IsWalkable = true;
-                    NextTile.Icon = PlayerIcon;
-                    NextTile.IsWalkable = false;
-                    player.X++;
-                    StatBar.Display(player);
-                    ActivityLog.AddToLog("You move " + _direction + ".");
-                    return true;
-                }
-                else if (NextTile.IsMonster)
-                {
-                    NextTileIsMonster(NextTile, player, map, activeMonsters);
-                    return true;
-                }
-                else
-                {
-                    ActivityLog.AddToLog("You can't move that way.");
-                    return false;
-                }
-            }
-            if (_direction == "NorthWest")
-            {
-                Tile NextTile = (Tile)GameMap[player.X - 1, player.Y - 1];
-               
-                if (NextTile.IsWalkable)
-                {
-                    CurrentTile.Icon = FloorIcon;
-                    CurrentTile.IsWalkable = true;
-                    NextTile.Icon = PlayerIcon;
-                    NextTile.IsWalkable = false;
-                    player.X--;
-                    player.Y--;
-                    StatBar.Display(player);
-                    ActivityLog.AddToLog("You move " + _direction + ".");
-                    return true;
-                }
-                else if (NextTile.IsMonster)
-                {
-                    NextTileIsMonster(NextTile, player, map, activeMonsters);
-                    return true;
-                }
-                else
-                {
-                    ActivityLog.AddToLog("You can't move that way.");
-                    return false;
-                }
-            }
-            if (_direction == "NorthEast")
-            {
-                Tile NextTile = (Tile)GameMap[player.X + 1, player.Y - 1];
+                case "West":
+                    NextTile = (Tile)GameMap[player.X - 1, player.Y];
 
-                if (NextTile.IsWalkable)
-                {
-                    CurrentTile.Icon = FloorIcon;
-                    CurrentTile.IsWalkable = true;
-                    NextTile.Icon = PlayerIcon;
-                    NextTile.IsWalkable = false;
-                    player.X++;
-                    player.Y--;
-                    StatBar.Display(player);
-                    ActivityLog.AddToLog("You move " + _direction + ".");
-                    return true;
-                }
-                else if (NextTile.IsMonster)
-                {
-                    NextTileIsMonster(NextTile, player, map, activeMonsters);
-                    return true;
-                }
-                else
-                {
-                    ActivityLog.AddToLog("You can't move that way.");
-                    return false;
-                }
-            }
-            if (_direction == "SouthWest")
-            {
-                Tile NextTile = (Tile)GameMap[player.X - 1, player.Y + 1];
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = PlayerIcon;
+                        NextTile.IsWalkable = false;
+                        player.X--;
+                        StatBar.Display(player);
+                        ActivityLog.AddToLog("You move " + _direction + ".");
+                        return true;
+                    }
+                    else if (NextTile.IsMonster)
+                    {
+                        NextTileIsMonster(NextTile, player, map, activeMonsters);
+                        return true;
+                    }
+                    break;
 
-                if (NextTile.IsWalkable)
-                {
-                    CurrentTile.Icon = FloorIcon;
-                    CurrentTile.IsWalkable = true;
-                    NextTile.Icon = PlayerIcon;
-                    NextTile.IsWalkable = false;
-                    player.X--;
-                    player.Y++;
-                    StatBar.Display(player);
-                    ActivityLog.AddToLog("You move " + _direction + ".");
-                    return true;
-                }
-                else if (NextTile.IsMonster)
-                {
-                    NextTileIsMonster(NextTile, player, map, activeMonsters);
-                    return true;
-                }
-                else
-                {
-                    ActivityLog.AddToLog("You can't move that way.");
-                    return false;
-                }
-            }
-            if (_direction == "SouthEast")
-            {
-                Tile NextTile = (Tile)GameMap[player.X + 1, player.Y + 1];
+                case "East":
+                    NextTile = (Tile)GameMap[player.X + 1, player.Y];
 
-                if (NextTile.IsWalkable)
-                {
-                    CurrentTile.Icon = FloorIcon;
-                    CurrentTile.IsWalkable = true;
-                    NextTile.Icon = PlayerIcon;
-                    NextTile.IsWalkable = false;
-                    player.X++;
-                    player.Y++;
-                    StatBar.Display(player);
-                    ActivityLog.AddToLog("You move " + _direction + ".");
-                    return true;
-                }
-                else if (NextTile.IsMonster)
-                {
-                    NextTileIsMonster(NextTile, player, map, activeMonsters);
-                    return true;
-                }
-                else
-                {
-                    ActivityLog.AddToLog("You can't move that way.");
-                    return false;
-                }
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = PlayerIcon;
+                        NextTile.IsWalkable = false;
+                        player.X++;
+                        StatBar.Display(player);
+                        ActivityLog.AddToLog("You move " + _direction + ".");
+                        return true;
+                    }
+                    else if (NextTile.IsMonster)
+                    {
+                        NextTileIsMonster(NextTile, player, map, activeMonsters);
+                        return true;
+                    }
+                    break;
+
+                case "NorthWest":
+                    NextTile = (Tile)GameMap[player.X - 1, player.Y - 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = PlayerIcon;
+                        NextTile.IsWalkable = false;
+                        player.X--;
+                        player.Y--;
+                        StatBar.Display(player);
+                        ActivityLog.AddToLog("You move " + _direction + ".");
+                        return true;
+                    }
+                    else if (NextTile.IsMonster)
+                    {
+                        NextTileIsMonster(NextTile, player, map, activeMonsters);
+                        return true;
+                    }
+                    break;
+
+                case "NorthEast":
+                    NextTile = (Tile)GameMap[player.X + 1, player.Y - 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = PlayerIcon;
+                        NextTile.IsWalkable = false;
+                        player.X++;
+                        player.Y--;
+                        StatBar.Display(player);
+                        ActivityLog.AddToLog("You move " + _direction + ".");
+                        return true;
+                    }
+                    else if (NextTile.IsMonster)
+                    {
+                        NextTileIsMonster(NextTile, player, map, activeMonsters);
+                        return true;
+                    }
+                    break;
+
+                case "SouthWest":
+                    NextTile = (Tile)GameMap[player.X - 1, player.Y + 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = PlayerIcon;
+                        NextTile.IsWalkable = false;
+                        player.X--;
+                        player.Y++;
+                        StatBar.Display(player);
+                        ActivityLog.AddToLog("You move " + _direction + ".");
+                        return true;
+                    }
+                    else if (NextTile.IsMonster)
+                    {
+                        NextTileIsMonster(NextTile, player, map, activeMonsters);
+                        return true;
+                    }
+                    break;
+
+                case "SouthEast":
+                    NextTile = (Tile)GameMap[player.X + 1, player.Y + 1];
+
+                    if (NextTile.IsWalkable)
+                    {
+                        CurrentTile.Icon = FloorIcon;
+                        CurrentTile.IsWalkable = true;
+                        NextTile.Icon = PlayerIcon;
+                        NextTile.IsWalkable = false;
+                        player.X++;
+                        player.Y++;
+                        StatBar.Display(player);
+                        ActivityLog.AddToLog("You move " + _direction + ".");
+                        return true;
+                    }
+                    else if (NextTile.IsMonster)
+                    {
+                        NextTileIsMonster(NextTile, player, map, activeMonsters);
+                        return true;
+                    }
+                    break;
+
             }
+            ActivityLog.AddToLog("You can't move that way.");
             return false;
+
         }
 
         private void NextTileIsMonster(Tile NextTile, Player player, Map map, List<Monster> activeMonsters)
@@ -1087,17 +1052,19 @@ namespace Arena.MapGenerator
                     monster.Y += _randY;
                 }
             }
-
-            // change tile stats when a monster moves, MoveMonster()
-            void ProcessMonsterTile(Tile CurrentTile, Tile NextTile, Monster monster)
-            {
-                CurrentTile.Icon = FloorIcon;
-                CurrentTile.IsMonster = false;
-                CurrentTile.IsWalkable = true;
-                NextTile.Icon = monster.Icon;
-                NextTile.IsMonster = true;
-                NextTile.IsWalkable = false;
-            }
         }
+
+        // change tile stats when a monster moves, MoveMonster()
+        //? recreate to ProcessTile - use for all tile changes - Player, Monsters, Items
+        private void ProcessMonsterTile(Tile CurrentTile, Tile NextTile, Monster monster)
+        {
+            CurrentTile.Icon = FloorIcon;
+            CurrentTile.IsMonster = false;
+            CurrentTile.IsWalkable = true;
+            NextTile.Icon = monster.Icon;
+            NextTile.IsMonster = true;
+            NextTile.IsWalkable = false;
+        }
+        
     }
 }

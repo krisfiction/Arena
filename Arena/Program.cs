@@ -61,8 +61,6 @@ namespace Arena
             for (int i = 0; i < 5; i++)
             {
                 activeMonsters.Add(Generate.Monster());
-
-                
             }
 
             //add monsters to map
@@ -74,11 +72,6 @@ namespace Arena
                 activeMonsters[i].Y = y;
             }
 
-            //testing - display monsters with X,Y cords
-            //for (int i = 0; i < activeMonsters.Count; i++)
-            //{
-            //    ActivityLog.AddToLog($"{i}) {activeMonsters[i].Name} X: {activeMonsters[i].X} Y:  {activeMonsters[i].Y}");
-            //}
 
             map.Display();
 
@@ -174,10 +167,10 @@ namespace Arena
                 }
 
                 //testing
-                for (int i = 0; i < activeMonsters.Count; i++)
-                {
-                    ActivityLog.AddToLog($"{i, 2}) {activeMonsters[i].Name, -10} X: {activeMonsters[i].X, 2} Y: {activeMonsters[i].Y, 2}");
-                }
+                //for (int i = 0; i < activeMonsters.Count; i++)
+                //{
+                //    ActivityLog.AddToLog($"{i, 2}) {activeMonsters[i].Name, -10} X: {activeMonsters[i].X, 2} Y: {activeMonsters[i].Y, 2}");
+                //}
 
 
                 map.Display();
