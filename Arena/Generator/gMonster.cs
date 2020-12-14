@@ -4,12 +4,11 @@ using System.Text;
 using Arena.Characters;
 using Arena.Characters.Monsters;
 
-namespace Arena
-{
-    internal static class Generate
-    {
-        private static readonly Random random = new Random();
 
+namespace Arena.Generator
+{
+    public static partial class Generate
+    {
         public static Monster Monster()
         {
 
