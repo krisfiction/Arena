@@ -3,6 +3,7 @@ using Arena;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Arena.Items;
 
 namespace Arena.MapGenerator
 {
@@ -773,7 +774,42 @@ namespace Arena.MapGenerator
         }
 
 
-        public (int X, int Y) PlaceMonster(Monster monster)
+
+        public (int X, int Y) PlaceItem(Item item)
+        {
+            Random random = new Random();
+            int _placed = 0;
+
+            do
+            {
+                int _randX = random.Next(0, MapSizeX);
+                int _randY = random.Next(0, MapSizeY);
+
+                Tile CurrentTile = (Tile)GameMap[_randX, _randY];
+                bool _iswalkable = CurrentTile.IsWalkable;
+                bool _ishallway = CurrentTile.IsHallway;
+
+                if (_iswalkable && _placed == 0 && !_ishallway) //? remove !_ishallway to allow monster to spawn in hallway
+                {
+                    CurrentTile.Icon = item.Icon;
+                    _placed = 1;
+                    //CurrentTile.IsMonster = true;
+                    CurrentTile.IsWalkable = false;
+
+                    item.X = _randX;
+                    item.Y = _randY;
+
+                }
+            } while (_placed == 0);
+            return (item.X, item.Y);
+        }
+
+
+
+
+
+
+            public (int X, int Y) PlaceMonster(Monster monster)
         {
             Random random = new Random();
             int _placed = 0;
