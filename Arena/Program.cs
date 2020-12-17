@@ -4,6 +4,10 @@ using Arena.MapGenerator;
 using Arena.Characters.Monsters;
 using System.Collections.Generic;
 using Arena.Generator;
+using Arena.Items;
+using Arena.Items.Potions;
+
+
 
 /*
  * Arena
@@ -21,7 +25,6 @@ namespace Arena
             Console.SetWindowSize(140, 46); //map will be 110x45, giving 30 spaces on the side and 10 lines below, +1 to prevent scroll on window
             Console.CursorVisible = false; //to hide the cursor
             Console.Clear();
-
 
             Map map = new Map();
 
@@ -53,7 +56,31 @@ namespace Arena
 
 
 
+            //Potion potion = new Potion();
+            //potion.Cast();
 
+            //Health health = new Health(4, 5); // 4,5 are pos X, Y
+            //health.Cast();
+
+
+            List<Item> activeItems = new List<Item>();
+
+            //generate 5 items
+            for (int i = 0; i < 5; i++)
+            {
+                activeItems.Add(Generate.Potion());
+            }
+
+            //add items to map
+            for (int i = 0; i < activeItems.Count; i++)
+            {
+                var (x, y) = map.PlaceItem(activeItems[i]);
+
+                activeItems[i].X = x;
+                activeItems[i].Y = y;
+            }
+
+            //? combine both of these loops
 
             List<Monster> activeMonsters = new List<Monster>();
 
