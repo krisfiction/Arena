@@ -19,6 +19,7 @@ namespace Arena.MapGenerator
         public string SWcornerIcon = "╚";
         public string SEcornerIcon = "╝";
 
+        private Tile PreviousTile;
        
         private readonly string PlayerIcon = "@"; // move ?
 
@@ -631,34 +632,34 @@ namespace Arena.MapGenerator
                     //apply walls
                     if (y == 0 || y == RoomHeight) // "═"
                     {
-                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, WallxIcon, false, false, false);
+                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, WallxIcon, false, false, false, false);
                     }
                     else if (x == 0 || x == RoomWidth) // "║"
                     {
-                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, WallyIcon, false, false, false);
+                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, WallyIcon, false, false, false, false);
                     }
                     //apply floors
                     else // "."
                     {
-                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, FloorIcon, true, false, false);
+                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, FloorIcon, true, false, false, false);
                     }
 
                     // apply corner walls
                     if (x == 0 && y == 0)
                     {
-                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, NWcornerIcon, false, false, false);
+                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, NWcornerIcon, false, false, false, false);
                     }
                     if (y == 0 && x == RoomWidth)
                     {
-                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, NEcornerIcon, false, false, false);
+                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, NEcornerIcon, false, false, false, false);
                     }
                     if (y == RoomHeight && x == RoomWidth)
                     {
-                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, SEcornerIcon, false, false, false);
+                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, SEcornerIcon, false, false, false, false);
                     }
                     if (y == RoomHeight && x == 0)
                     {
-                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, SWcornerIcon, false, false, false);
+                        GameMap[RoomPOSX + x, RoomPOSY + y] = new Tile(RoomPOSX + x, RoomPOSY + y, SWcornerIcon, false, false, false, false);
                     }
 
                 }
@@ -679,7 +680,7 @@ namespace Arena.MapGenerator
                 for (int y = 0; y <= MapSizeY - 1; y++)
                 {
                     //! fill array with blank tiles
-                    GameMap[x, y] = new Tile(x, y, " ", false, false, false);
+                    GameMap[x, y] = new Tile(x, y, " ", false, false, false, false);
                 }
             }
         }
@@ -788,13 +789,15 @@ namespace Arena.MapGenerator
                 Tile CurrentTile = (Tile)GameMap[_randX, _randY];
                 bool _iswalkable = CurrentTile.IsWalkable;
                 bool _ishallway = CurrentTile.IsHallway;
+                //bool _isitem = CurrentTile.IsItem;
 
                 if (_iswalkable && _placed == 0 && !_ishallway) //? remove !_ishallway to allow monster to spawn in hallway
                 {
                     CurrentTile.Icon = item.Icon;
                     _placed = 1;
                     //CurrentTile.IsMonster = true;
-                    CurrentTile.IsWalkable = false;
+                    CurrentTile.IsWalkable = true;
+                    CurrentTile.IsItem = true;
 
                     item.X = _randX;
                     item.Y = _randY;
@@ -860,6 +863,15 @@ namespace Arena.MapGenerator
         {
             //! door is being over written
 
+            //! item is being over wtriiten
+
+            
+            //todo PreviousTile is unmodified NextTile
+            /*
+             * set prevoiusTile if door open/shut or item picked up
+             * then reset tile based off previousTile setting
+             * 
+             */
             Tile CurrentTile = GameMap[player.X, player.Y];
             Tile NextTile;
 

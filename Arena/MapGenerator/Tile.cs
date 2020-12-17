@@ -13,8 +13,9 @@ namespace Arena.MapGenerator
         public bool IsHallway { get; set; }
 
         public bool IsMonster { get; set; }
+        public bool IsItem { get; set; }
 
-        public Tile(int _x, int _y, string _icon, bool _iswalkable, bool _ishallway, bool _ismonster)
+        public Tile(int _x, int _y, string _icon, bool _iswalkable, bool _ishallway, bool _ismonster, bool _isitem)
         {
             X = _x;
             Y = _y;
@@ -22,6 +23,7 @@ namespace Arena.MapGenerator
             IsWalkable = _iswalkable;
             IsHallway = _ishallway;
             IsMonster = _ismonster;
+            IsItem = _isitem;
         }
 
         public string DisplayIcon()

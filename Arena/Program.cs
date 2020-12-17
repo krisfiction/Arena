@@ -80,10 +80,7 @@ namespace Arena
                 activeItems[i].Y = y;
             }
 
-
-
-
-
+            //? combine both of these loops
 
             List<Monster> activeMonsters = new List<Monster>();
 
