@@ -45,7 +45,6 @@ namespace Arena
 
 
 
-
             Player player = new Player
             {
                 Name = "Tunk",
@@ -114,13 +113,13 @@ namespace Arena
 
             ActivityLog.Display();
 
-            StartGame(player, map, activeMonsters);
+            StartGame(player, map, activeMonsters, activeItems);
 
 
             
         }
 
-        public static void StartGame(Player player, Map map, List<Monster> activeMonsters)
+        public static void StartGame(Player player, Map map, List<Monster> activeMonsters, List<Item> activeItems)
         {
 
             const bool _keepPlaying = true;
@@ -192,6 +191,25 @@ namespace Arena
                 {
                     ActivityLog.AddToLog("cheater!");
                 }
+                if (aInput == ConsoleKey.I) //inventory
+                {
+                    Inventory.Loop();
+                }
+                if (aInput == ConsoleKey.G) //get item
+                {
+                    
+
+                    for (int i = 0; i < activeItems.Count; i++)
+                    {
+                        if (activeItems[i].X == player.X && activeItems[i].Y == player.Y)
+                        {
+                            ActivityLog.AddToLog("you pick up " + activeItems[i].Name);
+                            //todo add item to inventory
+                        }
+                    }
+
+
+                }
 
                 //testing
                 //for (int i = 0; i < activeMonsters.Count; i++)
@@ -202,6 +220,7 @@ namespace Arena
 
                 map.Display();
                 ActivityLog.Display();
+                StatBar.Display(player);
             } while (_keepPlaying);
 
         }
