@@ -109,7 +109,8 @@ namespace Arena
             //}
             //ActivityLog.AddToLog("this is the activity / combat log");
 
-
+            Inventory inventory = new Inventory();
+            inventory.Initialize();
 
             ActivityLog.Display();
 
@@ -133,56 +134,56 @@ namespace Arena
                 }
                 if (aInput == ConsoleKey.UpArrow || aInput == ConsoleKey.NumPad8)
                 {
-                    if (map.MovePlayer("North", player, map, activeMonsters))
+                    if (map.MovePlayer("North", player, map, activeMonsters, activeItems))
                     {
                         map.MoveMonster(map, activeMonsters);
                     }
                 }
                 if (aInput == ConsoleKey.DownArrow || aInput == ConsoleKey.NumPad2)
                 {
-                    if (map.MovePlayer("South", player, map, activeMonsters))
+                    if (map.MovePlayer("South", player, map, activeMonsters, activeItems))
                     {
                         map.MoveMonster(map, activeMonsters);
                     }
                 }
                 if (aInput == ConsoleKey.RightArrow || aInput == ConsoleKey.NumPad6)
                 {
-                    if (map.MovePlayer("East", player, map, activeMonsters))
+                    if (map.MovePlayer("East", player, map, activeMonsters, activeItems))
                     {
                         map.MoveMonster(map, activeMonsters);
                     }
                 }
                 if (aInput == ConsoleKey.LeftArrow || aInput == ConsoleKey.NumPad4)
                 {
-                    if (map.MovePlayer("West", player, map, activeMonsters))
+                    if (map.MovePlayer("West", player, map, activeMonsters, activeItems))
                     {
                         map.MoveMonster(map, activeMonsters);
                     }
                 }
                 if (aInput == ConsoleKey.NumPad9)
                 {
-                    if (map.MovePlayer("NorthEast", player, map, activeMonsters))
+                    if (map.MovePlayer("NorthEast", player, map, activeMonsters, activeItems))
                     {
                         map.MoveMonster(map, activeMonsters);
                     }
                 }
                 if (aInput == ConsoleKey.NumPad7)
                 {
-                    if (map.MovePlayer("NorthWest", player, map, activeMonsters))
+                    if (map.MovePlayer("NorthWest", player, map, activeMonsters, activeItems))
                     {
                         map.MoveMonster(map, activeMonsters);
                     }
                 }
                 if (aInput == ConsoleKey.NumPad3)
                 {
-                    if (map.MovePlayer("SouthEast", player, map, activeMonsters))
+                    if (map.MovePlayer("SouthEast", player, map, activeMonsters, activeItems))
                     {
                         map.MoveMonster(map, activeMonsters);
                     }
                 }
                 if (aInput == ConsoleKey.NumPad1)
                 {
-                    if (map.MovePlayer("SouthWest", player, map, activeMonsters))
+                    if (map.MovePlayer("SouthWest", player, map, activeMonsters, activeItems))
                     {
                         map.MoveMonster(map, activeMonsters);
                     }
@@ -195,22 +196,20 @@ namespace Arena
                 {
                     Inventory.Loop();
                 }
+
                 if (aInput == ConsoleKey.G) //get item
                 {
-                    
-
                     for (int i = 0; i < activeItems.Count; i++)
                     {
                         if (activeItems[i].X == player.X && activeItems[i].Y == player.Y)
                         {
                             ActivityLog.AddToLog("you pick up " + activeItems[i].Name);
                             //todo add item to inventory
+                            Inventory.PotionInventory.Add((Potion)activeItems[i]);
                         }
                     }
-
-
                 }
-
+                
                 //testing
                 //for (int i = 0; i < activeMonsters.Count; i++)
                 //{

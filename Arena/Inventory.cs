@@ -1,18 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Arena.Items.Potions;
 
 namespace Arena
 {
     public class Inventory
     {
+        //public static List<Inventory> Inventories { get; set; }
+        public static List<Items.Potion> PotionInventory { get; set; }
+
+        public void Initialize()
+        {
+            //Inventories = new List<Inventory>();
+            PotionInventory = new List<Items.Potion>();
+
+
+        }
+
+
+
+
+
+
+
+
+
         public static void Display()
         {
             Console.Clear();
-            Console.WriteLine("this is the inventory");
-            
+            if (PotionInventory.Count == 0)
+            {
+                Console.WriteLine("Potion Inventory Empty.");
+            }
+            else
+            {
+                Console.WriteLine("Potion Inventory:");
+                Console.WriteLine();
 
-
+                int _lineNumber = 0;
+                foreach (var Potion in PotionInventory)
+                {
+                    Console.WriteLine($"{_lineNumber} {Potion.Name}");
+                    _lineNumber++;
+                }
+            }
         }
 
 

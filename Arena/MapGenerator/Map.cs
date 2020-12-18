@@ -19,7 +19,7 @@ namespace Arena.MapGenerator
         public string SWcornerIcon = "╚";
         public string SEcornerIcon = "╝";
 
-        private Tile PreviousTile;
+        //private Tile PreviousTile; //! may need for replacing item icon if player chooses not to pick item up
        
         private readonly string PlayerIcon = "@"; // move ?
 
@@ -789,19 +789,17 @@ namespace Arena.MapGenerator
                 Tile CurrentTile = (Tile)GameMap[_randX, _randY];
                 bool _iswalkable = CurrentTile.IsWalkable;
                 bool _ishallway = CurrentTile.IsHallway;
-                //bool _isitem = CurrentTile.IsItem;
+                bool _isitem = CurrentTile.IsItem;
 
-                if (_iswalkable && _placed == 0 && !_ishallway) //? remove !_ishallway to allow monster to spawn in hallway
+                if (_iswalkable && _placed == 0 && !_ishallway && !_isitem) //? remove !_ishallway to allow item to spawn in hallway
                 {
                     CurrentTile.Icon = item.Icon;
                     _placed = 1;
-                    //CurrentTile.IsMonster = true;
                     CurrentTile.IsWalkable = true;
                     CurrentTile.IsItem = true;
 
                     item.X = _randX;
                     item.Y = _randY;
-
                 }
             } while (_placed == 0);
             return (item.X, item.Y);
@@ -859,7 +857,7 @@ namespace Arena.MapGenerator
 
         
 
-        public bool MovePlayer(string _direction, Player player, Map map, List<Monster> activeMonsters)
+        public bool MovePlayer(string _direction, Player player, Map map, List<Monster> activeMonsters, List<Item> activeItems)
         {
             //! door is being over written
 
