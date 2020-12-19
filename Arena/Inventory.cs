@@ -45,6 +45,10 @@ namespace Arena
                     _lineNumber++;
                 }
             }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("press 'esc' to return to the map.");
+            //? should i still display activity log (and statbar) or maybe a menu bar
         }
 
 

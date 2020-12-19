@@ -19,7 +19,7 @@ namespace Arena.MapGenerator
         public string SWcornerIcon = "╚";
         public string SEcornerIcon = "╝";
 
-        //private Tile PreviousTile; //! may need for replacing item icon if player chooses not to pick item up
+        private Tile PreviousTile; //! may need for replacing item icon if player chooses not to pick item up
        
         private readonly string PlayerIcon = "@"; // move ?
 
@@ -750,6 +750,7 @@ namespace Arena.MapGenerator
                 int _randX = random.Next(0, MapSizeX);
                 int _randY = random.Next(0, MapSizeY);
 
+                //Tile CurrentTile = PreviousTile = (Tile)GameMap[_randX, _randY]; //! testing code
                 Tile CurrentTile = (Tile)GameMap[_randX, _randY];
                 bool _iswalkable = CurrentTile.IsWalkable;
                 bool _ishallway = CurrentTile.IsHallway;
@@ -878,8 +879,27 @@ namespace Arena.MapGenerator
                 case "North":
                     NextTile = GameMap[player.X, player.Y - 1];
 
+                    //! this all needs refactored
+
                     if (NextTile.IsWalkable)
                     {
+                        if (CurrentTile.IsItem)
+                        {
+                            for (int i = 0; i < activeItems.Count; i++)
+                            {
+                                if (activeItems[i].X == CurrentTile.X && activeItems[i].Y == CurrentTile.Y)
+                                {
+                                    CurrentTile.Icon = activeItems[i].Icon;
+                                    CurrentTile.IsWalkable = true;
+                                    NextTile.Icon = PlayerIcon;
+                                    NextTile.IsWalkable = false;
+                                    player.Y--;
+                                    StatBar.Display(player);
+                                    ActivityLog.AddToLog("You move " + _direction + ".");
+                                    return true;
+                                }
+                            }
+                        }
                         CurrentTile.Icon = FloorIcon;
                         CurrentTile.IsWalkable = true;
                         NextTile.Icon = PlayerIcon;

@@ -204,8 +204,10 @@ namespace Arena
                         if (activeItems[i].X == player.X && activeItems[i].Y == player.Y)
                         {
                             ActivityLog.AddToLog("you pick up " + activeItems[i].Name);
-                            //todo add item to inventory
+                            
                             Inventory.PotionInventory.Add((Potion)activeItems[i]);
+
+                            activeItems.RemoveAt(i); // remove item from active list
                         }
                     }
                 }
