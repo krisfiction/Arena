@@ -921,6 +921,23 @@ namespace Arena.MapGenerator
 
                     if (NextTile.IsWalkable)
                     {
+                        if (CurrentTile.IsItem)
+                        {
+                            for (int i = 0; i < activeItems.Count; i++)
+                            {
+                                if (activeItems[i].X == CurrentTile.X && activeItems[i].Y == CurrentTile.Y)
+                                {
+                                    CurrentTile.Icon = activeItems[i].Icon;
+                                    CurrentTile.IsWalkable = true;
+                                    NextTile.Icon = PlayerIcon;
+                                    NextTile.IsWalkable = false;
+                                    player.Y++;
+                                    StatBar.Display(player);
+                                    ActivityLog.AddToLog("You move " + _direction + ".");
+                                    return true;
+                                }
+                            }
+                        }
                         CurrentTile.Icon = FloorIcon;
                         CurrentTile.IsWalkable = true;
                         NextTile.Icon = PlayerIcon;
@@ -942,6 +959,23 @@ namespace Arena.MapGenerator
 
                     if (NextTile.IsWalkable)
                     {
+                        if (CurrentTile.IsItem)
+                        {
+                            for (int i = 0; i < activeItems.Count; i++)
+                            {
+                                if (activeItems[i].X == CurrentTile.X && activeItems[i].Y == CurrentTile.Y)
+                                {
+                                    CurrentTile.Icon = activeItems[i].Icon;
+                                    CurrentTile.IsWalkable = true;
+                                    NextTile.Icon = PlayerIcon;
+                                    NextTile.IsWalkable = false;
+                                    player.X--;
+                                    StatBar.Display(player);
+                                    ActivityLog.AddToLog("You move " + _direction + ".");
+                                    return true;
+                                }
+                            }
+                        }
                         CurrentTile.Icon = FloorIcon;
                         CurrentTile.IsWalkable = true;
                         NextTile.Icon = PlayerIcon;
@@ -964,6 +998,23 @@ namespace Arena.MapGenerator
 
                     if (NextTile.IsWalkable)
                     {
+                        if (CurrentTile.IsItem)
+                        {
+                            for (int i = 0; i < activeItems.Count; i++)
+                            {
+                                if (activeItems[i].X == CurrentTile.X && activeItems[i].Y == CurrentTile.Y)
+                                {
+                                    CurrentTile.Icon = activeItems[i].Icon;
+                                    CurrentTile.IsWalkable = true;
+                                    NextTile.Icon = PlayerIcon;
+                                    NextTile.IsWalkable = false;
+                                    player.X++;
+                                    StatBar.Display(player);
+                                    ActivityLog.AddToLog("You move " + _direction + ".");
+                                    return true;
+                                }
+                            }
+                        }
                         CurrentTile.Icon = FloorIcon;
                         CurrentTile.IsWalkable = true;
                         NextTile.Icon = PlayerIcon;
@@ -985,6 +1036,24 @@ namespace Arena.MapGenerator
 
                     if (NextTile.IsWalkable)
                     {
+                        if (CurrentTile.IsItem)
+                        {
+                            for (int i = 0; i < activeItems.Count; i++)
+                            {
+                                if (activeItems[i].X == CurrentTile.X && activeItems[i].Y == CurrentTile.Y)
+                                {
+                                    CurrentTile.Icon = activeItems[i].Icon;
+                                    CurrentTile.IsWalkable = true;
+                                    NextTile.Icon = PlayerIcon;
+                                    NextTile.IsWalkable = false;
+                                    player.X--;
+                                    player.Y--;
+                                    StatBar.Display(player);
+                                    ActivityLog.AddToLog("You move " + _direction + ".");
+                                    return true;
+                                }
+                            }
+                        }
                         CurrentTile.Icon = FloorIcon;
                         CurrentTile.IsWalkable = true;
                         NextTile.Icon = PlayerIcon;
@@ -1007,6 +1076,24 @@ namespace Arena.MapGenerator
 
                     if (NextTile.IsWalkable)
                     {
+                        if (CurrentTile.IsItem)
+                        {
+                            for (int i = 0; i < activeItems.Count; i++)
+                            {
+                                if (activeItems[i].X == CurrentTile.X && activeItems[i].Y == CurrentTile.Y)
+                                {
+                                    CurrentTile.Icon = activeItems[i].Icon;
+                                    CurrentTile.IsWalkable = true;
+                                    NextTile.Icon = PlayerIcon;
+                                    NextTile.IsWalkable = false;
+                                    player.X++;
+                                    player.Y--;
+                                    StatBar.Display(player);
+                                    ActivityLog.AddToLog("You move " + _direction + ".");
+                                    return true;
+                                }
+                            }
+                        }
                         CurrentTile.Icon = FloorIcon;
                         CurrentTile.IsWalkable = true;
                         NextTile.Icon = PlayerIcon;
@@ -1029,6 +1116,24 @@ namespace Arena.MapGenerator
 
                     if (NextTile.IsWalkable)
                     {
+                        if (CurrentTile.IsItem)
+                        {
+                            for (int i = 0; i < activeItems.Count; i++)
+                            {
+                                if (activeItems[i].X == CurrentTile.X && activeItems[i].Y == CurrentTile.Y)
+                                {
+                                    CurrentTile.Icon = activeItems[i].Icon;
+                                    CurrentTile.IsWalkable = true;
+                                    NextTile.Icon = PlayerIcon;
+                                    NextTile.IsWalkable = false;
+                                    player.X--;
+                                    player.Y++;
+                                    StatBar.Display(player);
+                                    ActivityLog.AddToLog("You move " + _direction + ".");
+                                    return true;
+                                }
+                            }
+                        }
                         CurrentTile.Icon = FloorIcon;
                         CurrentTile.IsWalkable = true;
                         NextTile.Icon = PlayerIcon;
@@ -1051,6 +1156,24 @@ namespace Arena.MapGenerator
 
                     if (NextTile.IsWalkable)
                     {
+                        if (CurrentTile.IsItem)
+                        {
+                            for (int i = 0; i < activeItems.Count; i++)
+                            {
+                                if (activeItems[i].X == CurrentTile.X && activeItems[i].Y == CurrentTile.Y)
+                                {
+                                    CurrentTile.Icon = activeItems[i].Icon;
+                                    CurrentTile.IsWalkable = true;
+                                    NextTile.Icon = PlayerIcon;
+                                    NextTile.IsWalkable = false;
+                                    player.X++;
+                                    player.Y++;
+                                    StatBar.Display(player);
+                                    ActivityLog.AddToLog("You move " + _direction + ".");
+                                    return true;
+                                }
+                            }
+                        }
                         CurrentTile.Icon = FloorIcon;
                         CurrentTile.IsWalkable = true;
                         NextTile.Icon = PlayerIcon;
