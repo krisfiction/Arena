@@ -64,10 +64,11 @@ namespace Arena
 
             List<Item> activeItems = new List<Item>();
 
-            //generate 5 items
-            for (int i = 0; i < 5; i++)
+            //generate 6 items
+            for (int i = 0; i < 3; i++)
             {
                 activeItems.Add(Generate.Potion());
+                activeItems.Add(Generate.Scroll());
             }
 
             //add items to map
@@ -192,10 +193,23 @@ namespace Arena
                 {
                     ActivityLog.AddToLog("cheater!");
                 }
+
+
+
                 if (aInput == ConsoleKey.I) //inventory
                 {
-                    Inventory.Loop();
+                    Inventory.Loop("all");
                 }
+                if (aInput == ConsoleKey.C) //cast potion
+                {
+                    Inventory.Loop("potion");
+                }
+                if (aInput == ConsoleKey.R) //read scroll
+                {
+                    Inventory.Loop("scroll");
+                }
+
+
 
                 if (aInput == ConsoleKey.G) //get item
                 {
@@ -205,12 +219,21 @@ namespace Arena
                         {
                             ActivityLog.AddToLog("you pick up " + activeItems[i].Name);
                             
-                            Inventory.PotionInventory.Add((Potion)activeItems[i]);
+                            if (activeItems[i].Type == "Potion")
+                            {
+                                Inventory.PotionInventory.Add((Potion)activeItems[i]);
+                            }
+                            if (activeItems[i].Type == "Scroll")
+                            {
+                                Inventory.ScrollInventory.Add((Scroll)activeItems[i]);
+                            }
 
                             activeItems.RemoveAt(i); // remove item from active list
                         }
                     }
                 }
+
+
                 
                 //testing
                 //for (int i = 0; i < activeMonsters.Count; i++)

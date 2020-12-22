@@ -11,9 +11,15 @@ namespace Arena.Items.Potions
         {
             Name = "Health Potion"; //? remove potion from name
             Icon = "!"; //? move to be set in Potion.cs
+            Type = "Potion";
 
            // X = _x; //! will this work - set position at creation 
            // Y = _y;
+        }
+
+        public void Cast()
+        {
+            Console.WriteLine("you drink a health potion");
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Arena.Items
     {
         public string Name;
         public string Icon;
+        public string Type;
 
         public int X;
         public int Y;

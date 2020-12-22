@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 using Arena.Items;
-using Arena.Items.Potions;
+using Arena.Items.Scrolls;
 
 namespace Arena.Generator
 {
     public static partial class Generate
     {
-        public static Potion Potion()
+        public static Scroll Scroll()
         {
             switch (1)
             {
                 case 1:
-                    Health health = new Health();
-                    return health;
+                    Teleportation teleportation = new Teleportation();
+                    return teleportation;
             }
             //return null;
         }
