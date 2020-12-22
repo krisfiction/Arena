@@ -12,10 +12,10 @@ namespace Arena
             Console.SetCursorPosition(110, 0);
             Console.WriteLine(player.Name);
             Console.SetCursorPosition(110, 1);
-            Console.WriteLine($"Health: {player.Health}/{player.HealthMax}          ");
+            Console.WriteLine($"Health: {player.Health}/{player.HealthMax}   ");
             
             Console.SetCursorPosition(110, 3);
-            Console.WriteLine($"Player Position: x{player.X}, y{player.Y}          ");
+            Console.WriteLine($"Player Position: x{player.X}, y{player.Y}   ");
 
         }
     }

@@ -245,7 +245,7 @@ namespace Arena
 
                 map.Display();
                 ActivityLog.Display();
-                //StatBar.Display(player);
+                StatBar.Display(player);
             } while (_keepPlaying);
 
         }
