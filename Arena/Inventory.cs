@@ -74,8 +74,9 @@ namespace Arena
                 Display(player, "potion");
                 Display(player, "scroll");
             }
-            
-            
+
+            //Console.SetCursorPosition(0, 30);
+            //ActivityLog.Display();
             //? should i still display activity log (and statbar) or maybe a menu bar
         }
 
@@ -90,9 +91,12 @@ namespace Arena
             {
                 if (PotionInventory[i].Name == "Health Potion")
                 {
-                    Health.Cast(player);
+                    if (Health.Cast(player))
+                    {
+                        PotionInventory.RemoveAt(i);
+                    }
                 }
-                PotionInventory.RemoveAt(i);
+                //PotionInventory.RemoveAt(i);
             }
             if (_type == "scroll")
             {
