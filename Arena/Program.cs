@@ -199,14 +199,17 @@ namespace Arena
 
                 if (aInput == ConsoleKey.I) //inventory
                 {
+                    Console.Clear();
                     Inventory.Loop("all");
                 }
                 if (aInput == ConsoleKey.C) //cast potion
                 {
+                    Console.Clear();
                     Inventory.Loop("potion");
                 }
                 if (aInput == ConsoleKey.R) //read scroll
                 {
+                    Console.Clear();
                     Inventory.Loop("scroll");
                 }
 

@@ -8,31 +8,19 @@ namespace Arena
 {
     public class Inventory
     {
-        //public static List<Inventory> Inventories { get; set; }
         public static List<Items.Potion> PotionInventory { get; set; }
         public static List<Items.Scroll> ScrollInventory { get; set; }
 
         public void Initialize()
         {
-            //Inventories = new List<Inventory>();
             PotionInventory = new List<Items.Potion>();
             ScrollInventory = new List<Items.Scroll>();
-
-
         }
-
-
-
-
-
-
 
 
 
         public static void Display(string _type)
         {
-            Console.Clear();
-
             if (_type == "potion")
             {
                 if (PotionInventory.Count == 0)
@@ -50,7 +38,11 @@ namespace Arena
                         Console.WriteLine($"{_lineNumber} {Potion.Name}");
                         _lineNumber++;
                     }
-                    GetInput("potion");
+                    if (_type == "potion")
+                    {
+                        GetInput("potion");
+                    }
+                    
                 }
             }
             if (_type == "scroll")
@@ -70,18 +62,19 @@ namespace Arena
                         Console.WriteLine($"{_lineNumber} {Scroll.Name}");
                         _lineNumber++;
                     }
-                    GetInput("scroll");
+                    if (_type == "scroll")
+                    {
+                        GetInput("scroll");
+                    }
                 }
             }
             if (_type == "all")
             {
-                //Display("potion");
-                //Display("scroll");
+                Display("potion");
+                Display("scroll");
             }
             
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("press 'esc' to return to the map.");
+            
             //? should i still display activity log (and statbar) or maybe a menu bar
         }
 
@@ -118,6 +111,9 @@ namespace Arena
             do
             {
                 Display(_type);
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("press 'esc' to return to the map.");
 
                 ConsoleKey bInput = Console.ReadKey(true).Key; //true hides input
                 if (bInput == ConsoleKey.Escape)
@@ -126,6 +122,7 @@ namespace Arena
                 }
             } while (_displayInventory);
 
+            
         }
     }
 }
