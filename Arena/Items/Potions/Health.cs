@@ -17,7 +17,7 @@ namespace Arena.Items.Potions
            // Y = _y;
         }
 
-        public void Cast()
+        public static void Cast()
         {
             Console.WriteLine("you drink a health potion");
         }

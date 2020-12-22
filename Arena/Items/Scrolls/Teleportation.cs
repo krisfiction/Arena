@@ -8,9 +8,14 @@ namespace Arena.Items.Scrolls
     {
         public Teleportation()
         {
-            Name = "Teleportation";
+            Name = "Teleportation Scroll";
             Icon = "%"; //temp icon for 
             Type = "Scroll";
+        }
+
+        public static void Cast()
+        {
+            Console.WriteLine("you read a Telportation Scroll");
         }
     }
 }

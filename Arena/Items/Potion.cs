@@ -9,9 +9,5 @@ namespace Arena.Items
 
     public class Potion : Item
     {
-        //public void Cast()
-        //{
-        //    Console.WriteLine("broken");
-        //}
     }
 }

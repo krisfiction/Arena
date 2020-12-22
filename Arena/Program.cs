@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Arena.Generator;
 using Arena.Items;
 using Arena.Items.Potions;
+using Arena.Items.Scrolls;
 
 
 
@@ -221,11 +222,11 @@ namespace Arena
                             
                             if (activeItems[i].Type == "Potion")
                             {
-                                Inventory.PotionInventory.Add((Potion)activeItems[i]);
+                                Inventory.PotionInventory.Add((Health)activeItems[i]);
                             }
                             if (activeItems[i].Type == "Scroll")
                             {
-                                Inventory.ScrollInventory.Add((Scroll)activeItems[i]);
+                                Inventory.ScrollInventory.Add((Teleportation)activeItems[i]);
                             }
 
                             activeItems.RemoveAt(i); // remove item from active list

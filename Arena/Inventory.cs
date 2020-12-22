@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Arena.Items.Potions;
+using Arena.Items.Scrolls;
 
 namespace Arena
 {
@@ -32,7 +33,6 @@ namespace Arena
         {
             Console.Clear();
 
-
             if (_type == "potion")
             {
                 if (PotionInventory.Count == 0)
@@ -50,8 +50,8 @@ namespace Arena
                         Console.WriteLine($"{_lineNumber} {Potion.Name}");
                         _lineNumber++;
                     }
+                    GetInput("potion");
                 }
-                GetInput("potion");
             }
             if (_type == "scroll")
             {
@@ -70,6 +70,7 @@ namespace Arena
                         Console.WriteLine($"{_lineNumber} {Scroll.Name}");
                         _lineNumber++;
                     }
+                    GetInput("scroll");
                 }
             }
             if (_type == "all")
@@ -86,11 +87,26 @@ namespace Arena
 
         public static void GetInput(string _type)
         {
+            //? conver to letter instead of number
             Console.WriteLine("Enter Number:");
+
+            int i = Convert.ToInt32(Console.ReadLine());
 
             if (_type == "potion")
             {
-                PotionInventory[Convert.ToInt32(Console.ReadLine())].Cast();  //! broken
+                if (PotionInventory[i].Name == "Health Potion")
+                {
+                    Health.Cast();
+                }
+                PotionInventory.RemoveAt(i);
+            }
+            if (_type == "scroll")
+            {
+                if (ScrollInventory[i].Name == "Teleportation Scroll")
+                {
+                    Teleportation.Cast();
+                }
+                ScrollInventory.RemoveAt(i);
             }
         }
 
