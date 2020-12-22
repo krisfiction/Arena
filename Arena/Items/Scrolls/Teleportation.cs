@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Arena.Characters;
 
 namespace Arena.Items.Scrolls
 {
@@ -9,11 +10,11 @@ namespace Arena.Items.Scrolls
         public Teleportation()
         {
             Name = "Teleportation Scroll";
-            Icon = "%"; //temp icon for 
+            Icon = "?";
             Type = "Scroll";
         }
 
-        public static void Cast()
+        public static void Cast(Player player)
         {
             Console.WriteLine("you read a Telportation Scroll");
         }

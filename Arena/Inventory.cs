@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Arena.Items.Potions;
 using Arena.Items.Scrolls;
+using Arena.Characters;
 
 namespace Arena
 {
@@ -19,7 +20,7 @@ namespace Arena
 
 
 
-        public static void Display(string _type)
+        public static void Display(Player player, string _type)
         {
             if (_type == "potion")
             {
@@ -40,7 +41,7 @@ namespace Arena
                     }
                     if (_type == "potion")
                     {
-                        GetInput("potion");
+                        GetInput(player, "potion");
                     }
                     
                 }
@@ -64,21 +65,21 @@ namespace Arena
                     }
                     if (_type == "scroll")
                     {
-                        GetInput("scroll");
+                        GetInput(player, "scroll");
                     }
                 }
             }
             if (_type == "all")
             {
-                Display("potion");
-                Display("scroll");
+                Display(player, "potion");
+                Display(player, "scroll");
             }
             
             
             //? should i still display activity log (and statbar) or maybe a menu bar
         }
 
-        public static void GetInput(string _type)
+        public static void GetInput(Player player, string _type)
         {
             //? conver to letter instead of number
             Console.WriteLine("Enter Number:");
@@ -89,7 +90,7 @@ namespace Arena
             {
                 if (PotionInventory[i].Name == "Health Potion")
                 {
-                    Health.Cast();
+                    Health.Cast(player);
                 }
                 PotionInventory.RemoveAt(i);
             }
@@ -97,20 +98,20 @@ namespace Arena
             {
                 if (ScrollInventory[i].Name == "Teleportation Scroll")
                 {
-                    Teleportation.Cast();
+                    Teleportation.Cast(player);
                 }
                 ScrollInventory.RemoveAt(i);
             }
         }
 
 
-        public static void Loop(string _type)
+        public static void Loop(Player player, string _type)
         {
 
             bool _displayInventory = true;
             do
             {
-                Display(_type);
+                Display(player, _type);
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("press 'esc' to return to the map.");

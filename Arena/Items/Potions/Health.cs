@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Arena.Characters;
 
 namespace Arena.Items.Potions
 {
@@ -17,9 +18,11 @@ namespace Arena.Items.Potions
            // Y = _y;
         }
 
-        public static void Cast()
+        public static void Cast(Player player)
         {
-            Console.WriteLine("you drink a health potion");
+            //fix to be useable
+            player.Health += 50;
+            Console.WriteLine("you quaff a health potion");
         }
     }
 }
