@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Arena.Generator;
 using Arena.Items;
 using Arena.Items.Potions;
+using Arena.Items.Scrolls;
 
 
 
@@ -64,10 +65,11 @@ namespace Arena
 
             List<Item> activeItems = new List<Item>();
 
-            //generate 5 items
-            for (int i = 0; i < 5; i++)
+            //generate 6 items
+            for (int i = 0; i < 3; i++)
             {
                 activeItems.Add(Generate.Potion());
+                activeItems.Add(Generate.Scroll());
             }
 
             //add items to map
@@ -192,10 +194,26 @@ namespace Arena
                 {
                     ActivityLog.AddToLog("cheater!");
                 }
+
+
+
                 if (aInput == ConsoleKey.I) //inventory
                 {
-                    Inventory.Loop();
+                    Console.Clear();
+                    Inventory.Loop(player, "all");
                 }
+                if (aInput == ConsoleKey.Q) //quaff potion
+                {
+                    Console.Clear();
+                    Inventory.Loop(player, "potion");
+                }
+                if (aInput == ConsoleKey.R) //read scroll
+                {
+                    Console.Clear();
+                    Inventory.Loop(player, "scroll");
+                }
+
+
 
                 if (aInput == ConsoleKey.G) //get item
                 {
@@ -205,12 +223,21 @@ namespace Arena
                         {
                             ActivityLog.AddToLog("you pick up " + activeItems[i].Name);
                             
-                            Inventory.PotionInventory.Add((Potion)activeItems[i]);
+                            if (activeItems[i].Type == "Potion")
+                            {
+                                Inventory.PotionInventory.Add((Health)activeItems[i]);
+                            }
+                            if (activeItems[i].Type == "Scroll")
+                            {
+                                Inventory.ScrollInventory.Add((Teleportation)activeItems[i]);
+                            }
 
                             activeItems.RemoveAt(i); // remove item from active list
                         }
                     }
                 }
+
+
                 
                 //testing
                 //for (int i = 0; i < activeMonsters.Count; i++)
@@ -221,7 +248,7 @@ namespace Arena
 
                 map.Display();
                 ActivityLog.Display();
-                //StatBar.Display(player);
+                StatBar.Display(player);
             } while (_keepPlaying);
 
         }

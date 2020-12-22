@@ -19,7 +19,7 @@ namespace Arena.MapGenerator
         public string SWcornerIcon = "╚";
         public string SEcornerIcon = "╝";
 
-        private Tile PreviousTile; //! may need for replacing item icon if player chooses not to pick item up
+        //private Tile PreviousTile; //! may need for replacing item icon if player chooses not to pick item up
        
         private readonly string PlayerIcon = "@"; // move ?
 
@@ -1224,7 +1224,10 @@ namespace Arena.MapGenerator
 
             foreach (Monster monster in activeMonsters)
             {
-                //! make random chance if monster moves or leave at random 0,0
+                //? make random chance if monster moves or leave at random 0,0
+
+                //! monsters erase icon when they walk over a item 
+                //? fix or remove item from activeList as if the monster took the item
 
                 Tile CurrentTile = GameMap[monster.X, monster.Y];
 
