@@ -200,17 +200,17 @@ namespace Arena
                 if (aInput == ConsoleKey.I) //inventory
                 {
                     Console.Clear();
-                    Inventory.Loop(player, "all");
+                    Inventory.Loop(player, map, "all");
                 }
                 if (aInput == ConsoleKey.Q) //quaff potion
                 {
                     Console.Clear();
-                    Inventory.Loop(player, "potion");
+                    Inventory.Loop(player, map, "potion");
                 }
                 if (aInput == ConsoleKey.R) //read scroll
                 {
                     Console.Clear();
-                    Inventory.Loop(player, "scroll");
+                    Inventory.Loop(player, map, "scroll");
                 }
 
 
