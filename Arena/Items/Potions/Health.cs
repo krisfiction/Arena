@@ -24,6 +24,7 @@ namespace Arena.Items.Potions
             {
                 //Console.Clear();
                 Console.WriteLine("You are already as max health!");
+                ActivityLog.AddToLog("You are already as max health!");
                 return false;
             }
             else
@@ -40,6 +41,8 @@ namespace Arena.Items.Potions
                 }
                 //Console.Clear();
                 Console.WriteLine("you have used a 60% heal potion, you gained " + (player.Health - oldHP) + "hp,  you are now at " + player.Health + "hp");
+                ActivityLog.AddToLog("you have used a 60% heal potion, you gained " + (player.Health - oldHP) + "hp,  you are now at " + player.Health + "hp");
+
                 return true;
             }
         }

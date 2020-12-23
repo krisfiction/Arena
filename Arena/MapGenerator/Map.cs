@@ -750,7 +750,6 @@ namespace Arena.MapGenerator
                 int _randX = random.Next(0, MapSizeX);
                 int _randY = random.Next(0, MapSizeY);
 
-                //Tile CurrentTile = PreviousTile = (Tile)GameMap[_randX, _randY]; //! testing code
                 Tile CurrentTile = (Tile)GameMap[_randX, _randY];
                 bool _iswalkable = CurrentTile.IsWalkable;
                 bool _ishallway = CurrentTile.IsHallway;
@@ -763,16 +762,10 @@ namespace Arena.MapGenerator
                     player.X = _randX;
                     player.Y = _randY;
                     _placed = 1;
-
-                    
-
                 }
             } while (_placed == 0);
 
-            //DisplayPlayerPosition();
             StatBar.Display(player);
-
-
         }
 
 
@@ -840,6 +833,16 @@ namespace Arena.MapGenerator
             return (monster.X, monster.Y);
 
         }
+
+        //? rename to ChangeTileIconToFloor(X, Y)
+        //? or expand to ChangeTileIcon(X, Y, Icon)
+        public void ChangeTileIcon(int X, int Y)
+        {
+            Tile CurrentTile = (Tile)GameMap[X, Y];
+            CurrentTile.Icon = FloorIcon;
+        }
+
+
 
         public void RemoveMonster(Monster monster)
         {
