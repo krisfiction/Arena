@@ -31,14 +31,19 @@ namespace Arena.Items.Potions
             {
                 int oldHP = player.Health;
                 int tooHeal = Convert.ToInt32((player.HealthMax / 100) * 60); // Convert.ToInt32 to prevent half numbers like 59.3 hp
-                if ((player.Health + tooHeal) > player.HealthMax) // if the potion will heal over max hp
-                {
-                    player.Health = player.HealthMax; // set hp to max
-                }
-                else // if potion will not over heal
-                {
-                    player.Health += tooHeal; // add heal amount to current hp
-                }
+
+
+                player.Health = Math.Min(player.HealthMax, player.Health + tooHeal); // compare 2 int's and return the lowest
+                // above replaces below
+                //if ((player.Health + tooHeal) > player.HealthMax) // if the potion will heal over max hp
+                //{
+                //    player.Health = player.HealthMax; // set hp to max
+                //}
+                //else // if potion will not over heal
+                //{
+                //    player.Health += tooHeal; // add heal amount to current hp
+                //}
+
                 //Console.Clear();
                 Console.WriteLine("you have used a 60% heal potion, you gained " + (player.Health - oldHP) + "hp,  you are now at " + player.Health + "hp");
                 ActivityLog.AddToLog("you have used a 60% heal potion, you gained " + (player.Health - oldHP) + "hp,  you are now at " + player.Health + "hp");
