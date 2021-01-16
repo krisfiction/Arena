@@ -1,20 +1,16 @@
-﻿using System;
-using Arena.Characters;
-using Arena.MapGenerator;
-using Arena.Characters.Monsters;
-using System.Collections.Generic;
+﻿using Arena.Characters;
 using Arena.Generator;
 using Arena.Items;
 using Arena.Items.Potions;
 using Arena.Items.Scrolls;
-
-
+using Arena.MapGenerator;
+using System;
+using System.Collections.Generic;
 
 /*
  * Arena
  * a testing room
  */
-
 
 namespace Arena
 {
@@ -44,8 +40,6 @@ namespace Arena
 
             map.CreateHallways();
 
-
-
             Player player = new Player
             {
                 Name = "Tunk",
@@ -54,14 +48,11 @@ namespace Arena
             };
             map.PlacePlayer(player);
 
-
-
             //Potion potion = new Potion();
             //potion.Cast();
 
             //Health health = new Health(4, 5); // 4,5 are pos X, Y
             //health.Cast();
-
 
             List<Item> activeItems = new List<Item>();
 
@@ -100,9 +91,7 @@ namespace Arena
                 activeMonsters[i].Y = y;
             }
 
-
             map.Display();
-
 
             //for testing to fill log with text
             //for (int i = 0; i < 6; i++)
@@ -117,85 +106,75 @@ namespace Arena
             ActivityLog.Display();
 
             StartGame(player, map, activeMonsters, activeItems);
-
-
-            
         }
 
         public static void StartGame(Player player, Map map, List<Monster> activeMonsters, List<Item> activeItems)
         {
-
             const bool _keepPlaying = true;
             do
             {
                 ConsoleKey aInput = Console.ReadKey(true).Key; //true hides input
+                bool _moveKeyPressed = false;
+                string _moveKeyDirection = null;
+
                 if (aInput == ConsoleKey.F5) //reload for testing
                 {
                     ActivityLog.ClearLog();
                     Main();
                 }
+
+                // move keys
                 if (aInput == ConsoleKey.UpArrow || aInput == ConsoleKey.NumPad8)
                 {
-                    if (map.MovePlayer("North", player, map, activeMonsters, activeItems))
-                    {
-                        map.MoveMonster(map, activeMonsters);
-                    }
+                    _moveKeyPressed = true;
+                    _moveKeyDirection = "North";
                 }
                 if (aInput == ConsoleKey.DownArrow || aInput == ConsoleKey.NumPad2)
                 {
-                    if (map.MovePlayer("South", player, map, activeMonsters, activeItems))
-                    {
-                        map.MoveMonster(map, activeMonsters);
-                    }
+                    _moveKeyPressed = true;
+                    _moveKeyDirection = "South";
                 }
                 if (aInput == ConsoleKey.RightArrow || aInput == ConsoleKey.NumPad6)
                 {
-                    if (map.MovePlayer("East", player, map, activeMonsters, activeItems))
-                    {
-                        map.MoveMonster(map, activeMonsters);
-                    }
+                    _moveKeyPressed = true;
+                    _moveKeyDirection = "East";
                 }
                 if (aInput == ConsoleKey.LeftArrow || aInput == ConsoleKey.NumPad4)
                 {
-                    if (map.MovePlayer("West", player, map, activeMonsters, activeItems))
-                    {
-                        map.MoveMonster(map, activeMonsters);
-                    }
+                    _moveKeyPressed = true;
+                    _moveKeyDirection = "West";
                 }
                 if (aInput == ConsoleKey.NumPad9)
                 {
-                    if (map.MovePlayer("NorthEast", player, map, activeMonsters, activeItems))
-                    {
-                        map.MoveMonster(map, activeMonsters);
-                    }
+                    _moveKeyPressed = true;
+                    _moveKeyDirection = "NorthEast";
                 }
                 if (aInput == ConsoleKey.NumPad7)
                 {
-                    if (map.MovePlayer("NorthWest", player, map, activeMonsters, activeItems))
-                    {
-                        map.MoveMonster(map, activeMonsters);
-                    }
+                    _moveKeyPressed = true;
+                    _moveKeyDirection = "NorthWest";
                 }
                 if (aInput == ConsoleKey.NumPad3)
                 {
-                    if (map.MovePlayer("SouthEast", player, map, activeMonsters, activeItems))
-                    {
-                        map.MoveMonster(map, activeMonsters);
-                    }
+                    _moveKeyPressed = true;
+                    _moveKeyDirection = "SouthEast";
                 }
                 if (aInput == ConsoleKey.NumPad1)
                 {
-                    if (map.MovePlayer("SouthWest", player, map, activeMonsters, activeItems))
-                    {
-                        map.MoveMonster(map, activeMonsters);
-                    }
+                    _moveKeyPressed = true;
+                    _moveKeyDirection = "SouthWest";
                 }
+                if (_moveKeyPressed) //if a moved key is pressed do this
+                {
+                    map.MovePlayer(_moveKeyDirection, player, map, activeMonsters, activeItems);
+                    map.MoveMonster(map, activeMonsters);
+                }
+
+
                 if (aInput == ConsoleKey.Oem3) // cheat console activation key / for possible cheat codes
                 {
                     ActivityLog.AddToLog("cheater!");
                 }
-
-
 
                 if (aInput == ConsoleKey.I) //inventory
                 {
@@ -213,8 +192,6 @@ namespace Arena
                     Inventory.Loop(player, map, "scroll");
                 }
 
-
-
                 if (aInput == ConsoleKey.G) //get item
                 {
                     for (int i = 0; i < activeItems.Count; i++)
@@ -222,7 +199,7 @@ namespace Arena
                         if (activeItems[i].X == player.X && activeItems[i].Y == player.Y)
                         {
                             ActivityLog.AddToLog("you pick up " + activeItems[i].Name);
-                            
+
                             if (activeItems[i].Type == "Potion")
                             {
                                 Inventory.PotionInventory.Add((Health)activeItems[i]);
@@ -237,20 +214,16 @@ namespace Arena
                     }
                 }
 
-
-                
                 //testing
                 //for (int i = 0; i < activeMonsters.Count; i++)
                 //{
                 //    ActivityLog.AddToLog($"{i, 2}) {activeMonsters[i].Name, -10} X: {activeMonsters[i].X, 2} Y: {activeMonsters[i].Y, 2}");
                 //}
 
-
                 map.Display();
                 ActivityLog.Display();
                 StatBar.Display(player);
             } while (_keepPlaying);
-
         }
     }
 }
