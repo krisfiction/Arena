@@ -16,14 +16,19 @@ namespace Arena
 {
     internal static class Program
     {
+        private static List<Item> activeItems = new List<Item>();
+        private static Map map = new Map();
+
         public static void Main()
         {
+            activeItems.Clear();
+
             Console.Title = "Arena";
             Console.SetWindowSize(140, 46); //map will be 110x45, giving 30 spaces on the side and 10 lines below, +1 to prevent scroll on window
             Console.CursorVisible = false; //to hide the cursor
             Console.Clear();
 
-            Map map = new Map();
+            // Map map = new Map();
 
             map.FillMap();
             map.FillRooms();
@@ -54,7 +59,7 @@ namespace Arena
             //Health health = new Health(4, 5); // 4,5 are pos X, Y
             //health.Cast();
 
-            List<Item> activeItems = new List<Item>();
+            //List<Item> activeItems = new List<Item>();
 
             //generate 6 items
             for (int i = 0; i < 3; i++)
@@ -170,7 +175,6 @@ namespace Arena
                     map.MoveMonster(map, activeMonsters);
                 }
 
-
                 if (aInput == ConsoleKey.Oem3) // cheat console activation key / for possible cheat codes
                 {
                     ActivityLog.AddToLog("cheater!");
@@ -192,6 +196,7 @@ namespace Arena
                     Inventory.Loop(player, map, "scroll");
                 }
 
+                //! curently broken --> seems fixed - set CurrentTile.IsItem = false on pickup
                 if (aInput == ConsoleKey.G) //get item
                 {
                     for (int i = 0; i < activeItems.Count; i++)
@@ -210,6 +215,8 @@ namespace Arena
                             }
 
                             activeItems.RemoveAt(i); // remove item from active list
+
+                            map.ProcessItemTile(player); //set tile.IsItem to false
                         }
                     }
                 }

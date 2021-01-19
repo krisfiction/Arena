@@ -830,16 +830,13 @@ namespace Arena.MapGenerator
 
         public void HandleMovement(Tile CurrentTile, Tile NextTile, List<Item> activeItems, Player player, Map map, List<Monster> activeMonsters, string _direction)
         {
-            if (NextTile.IsWalkable)
+            if (NextTile.IsWalkable && CurrentTile.IsItem)
             {
-                if (CurrentTile.IsItem)
-                {
-                    CurrentTileIsItem(CurrentTile, NextTile, activeItems, player, _direction);
-                }
-                else
-                {
-                    NextTileIsWalkable(CurrentTile, NextTile, player, _direction);
-                }
+                CurrentTileIsItem(CurrentTile, NextTile, activeItems, player, _direction);
+            }
+            else if (NextTile.IsWalkable)
+            {
+                NextTileIsWalkable(CurrentTile, NextTile, player, _direction);
             }
             else if (NextTile.IsMonster)
             {
@@ -859,42 +856,42 @@ namespace Arena.MapGenerator
                 case "North":
                     NextTile = GameMap[player.X, player.Y - 1];
                     HandleMovement(CurrentTile, NextTile, activeItems, player, map, activeMonsters, _direction);
-                    break;
+                    return true;
 
                 case "South":
                     NextTile = GameMap[player.X, player.Y + 1];
                     HandleMovement(CurrentTile, NextTile, activeItems, player, map, activeMonsters, _direction);
-                    break;
+                    return true;
 
                 case "West":
-                    NextTile = (Tile)GameMap[player.X - 1, player.Y];
+                    NextTile = GameMap[player.X - 1, player.Y];
                     HandleMovement(CurrentTile, NextTile, activeItems, player, map, activeMonsters, _direction);
-                    break;
+                    return true;
 
                 case "East":
-                    NextTile = (Tile)GameMap[player.X + 1, player.Y];
+                    NextTile = GameMap[player.X + 1, player.Y];
                     HandleMovement(CurrentTile, NextTile, activeItems, player, map, activeMonsters, _direction);
-                    break;
+                    return true;
 
                 case "NorthWest":
-                    NextTile = (Tile)GameMap[player.X - 1, player.Y - 1];
+                    NextTile = GameMap[player.X - 1, player.Y - 1];
                     HandleMovement(CurrentTile, NextTile, activeItems, player, map, activeMonsters, _direction);
-                    break;
+                    return true;
 
                 case "NorthEast":
-                    NextTile = (Tile)GameMap[player.X + 1, player.Y - 1];
+                    NextTile = GameMap[player.X + 1, player.Y - 1];
                     HandleMovement(CurrentTile, NextTile, activeItems, player, map, activeMonsters, _direction);
-                    break;
+                    return true;
 
                 case "SouthWest":
-                    NextTile = (Tile)GameMap[player.X - 1, player.Y + 1];
+                    NextTile = GameMap[player.X - 1, player.Y + 1];
                     HandleMovement(CurrentTile, NextTile, activeItems, player, map, activeMonsters, _direction);
-                    break;
+                    return true;
 
                 case "SouthEast":
-                    NextTile = (Tile)GameMap[player.X + 1, player.Y + 1];
+                    NextTile = GameMap[player.X + 1, player.Y + 1];
                     HandleMovement(CurrentTile, NextTile, activeItems, player, map, activeMonsters, _direction);
-                    break;
+                    return true;
             }
             ActivityLog.AddToLog("You can't move that way.");
             return false;
@@ -958,6 +955,12 @@ namespace Arena.MapGenerator
             NextTile.Icon = monster.Icon;
             NextTile.IsMonster = true;
             NextTile.IsWalkable = false;
+        }
+
+        public void ProcessItemTile(Player player)
+        {
+            Tile CurrentTile = GameMap[player.X, player.Y];
+            CurrentTile.IsItem = false;
         }
     }
 }
