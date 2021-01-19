@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Arena.MapGenerator
 {
-    internal class Tile
+    public class Tile
     {
         public int X { get; set; }
         public int Y { get; set; }
