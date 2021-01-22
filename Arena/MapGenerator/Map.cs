@@ -1,5 +1,6 @@
 ﻿using Arena.Characters;
 using Arena.Items;
+using Arena.Generator;
 using System;
 using System.Collections.Generic;
 
@@ -840,7 +841,7 @@ namespace Arena.MapGenerator
             }
             else if (NextTile.IsMonster)
             {
-                NextTileIsMonster(NextTile, player, map, activeMonsters);
+                NextTileIsMonster(NextTile, player, map, activeMonsters, activeItems);
             }
         }
 
@@ -897,7 +898,7 @@ namespace Arena.MapGenerator
             return false;
         }
 
-        private void NextTileIsMonster(Tile NextTile, Player player, Map map, List<Monster> activeMonsters)
+        private void NextTileIsMonster(Tile NextTile, Player player, Map map, List<Monster> activeMonsters, List<Item> activeItems)
         {
             for (int i = 0; i < activeMonsters.Count; i++)
             {
@@ -906,6 +907,14 @@ namespace Arena.MapGenerator
                     if (Combat.PlayerAttacks(player, activeMonsters[i], map)) //if return true
                     {
                         activeMonsters.RemoveAt(i);
+
+                        //! Loot Code - move to its own thing
+                        activeItems.Add(Generate.Potion());
+
+                        activeItems[activeItems.Count - 1].X = NextTile.X;
+                        activeItems[activeItems.Count - 1].Y = NextTile.Y;
+
+                        NextTile.Icon = "*"; //test icon
                     }
                 }
             }
