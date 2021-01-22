@@ -661,6 +661,9 @@ namespace Arena.MapGenerator
 
         public void Display()
         {
+            int plX = 0;
+            int plY = 0;
+
             for (int x = 0; x <= MapSizeX - 1; x++)
             {
                 for (int y = 0; y <= MapSizeY - 1; y++)
@@ -674,6 +677,8 @@ namespace Arena.MapGenerator
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine(_icon);
                         Console.ForegroundColor = ConsoleColor.White;
+                        plX = x;
+                        plY = y;
                     }
                     else if (CurrentTile.IsMonster) //set monster icon to red / may change this, red is hard to see
                     {
@@ -688,9 +693,40 @@ namespace Arena.MapGenerator
                         Console.ForegroundColor = ConsoleColor.White;
                         Console.WriteLine(_icon);
                     }
+
+                    //disabled for being slow
+                    //POV(plX, plY); 
+                    
                 }
             }
         }
+
+        //! this is horribly slow
+        public void POV(int posX, int posY) 
+        {
+            Tile CurrentTile = (Tile)GameMap[posX, posY];
+            string _icon = CurrentTile.Icon;
+
+            for (int x = (posX - 1); x <= (posX + 1); x++)
+            {
+                for (int y = (posY - 1); y <= (posY + 1); y++)
+                {
+                    if (posX != 0 && posY != 0)
+                    {
+                        CurrentTile = (Tile)GameMap[x, y];
+                        _icon = CurrentTile.Icon;
+
+                        Console.SetCursorPosition(x, y);
+                        Console.BackgroundColor = ConsoleColor.Blue;
+                        Console.WriteLine(_icon);
+                    }
+                }
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+        }
+
+
+
 
         public void PlacePlayer(Player player)
         {
