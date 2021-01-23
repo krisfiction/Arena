@@ -20,6 +20,7 @@ namespace Arena
 
         public static void Display()
         {
+            Console.SetCursorPosition(0, 36); //! quick add may needs adjusted
             if (Log.Count > 10)
             {
                 for (int i = Log.Count - 10; i < Log.Count; i++)
