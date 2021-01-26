@@ -97,9 +97,13 @@ namespace Arena
 
             //int i = Convert.ToInt32(Console.ReadLine());
             ConsoleKey cInput = Console.ReadKey(true).Key; //true hides input
-            int i = (int)cInput - 65; //a == 0
 
-            //add escape key input
+            if (cInput == ConsoleKey.Escape)
+            {
+                return; //? is this the correct way to do this
+            }
+
+            int i = (int)cInput - 65; //a == 0
 
             if (_type == "potion")
             {
