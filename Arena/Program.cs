@@ -17,7 +17,7 @@ namespace Arena
     internal static class Program
     {
         private static List<Item> activeItems = new List<Item>();
-        private static Map map = new Map();
+        private static readonly Map map = new Map();
 
         public static void Main()
         {
