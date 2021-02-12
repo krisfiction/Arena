@@ -172,6 +172,67 @@ namespace Arena.MapGenerator
             }
         }
 
+
+        public bool CheckLoneRooms()
+        {
+            bool RoomAlone = false;
+
+            Room room1 = (Room)rooms[0, 0];
+            Room room2 = (Room)rooms[0, 1];
+            Room room3 = (Room)rooms[0, 2];
+
+            Room room4 = (Room)rooms[1, 0];
+            Room room5 = (Room)rooms[1, 1];
+            Room room6 = (Room)rooms[1, 2];
+
+            Room room7 = (Room)rooms[2, 0];
+            Room room8 = (Room)rooms[2, 1];
+            Room room9 = (Room)rooms[2, 2];
+
+            if (room1.Number != 0 && room2.Number == 0 && room3.Number == 0 && room4.Number == 0 && room7.Number == 0)
+            {
+                RoomAlone = true;
+            }
+            if (room1.Number == 0 && room2.Number != 0 && room3.Number == 0 && room5.Number == 0 && room8.Number == 0)
+            {
+                RoomAlone = true;
+            }
+            if (room1.Number == 0 && room2.Number == 0 && room3.Number != 0 && room6.Number == 0 && room6.Number == 0)
+            {
+                RoomAlone = true;
+            }
+
+            if (room4.Number != 0 && room5.Number == 0 && room6.Number == 0 && room1.Number == 0 && room7.Number == 0)
+            {
+                RoomAlone = true;
+            }
+            if (room5.Number != 0 && room4.Number == 0 && room6.Number == 0 && room2.Number == 0 && room8.Number == 0)
+            {
+                RoomAlone = true;
+            }
+            if (room6.Number != 0 && room4.Number == 0 && room5.Number == 0 && room3.Number == 0 && room9.Number == 0)
+            {
+                RoomAlone = true;
+            }
+
+            if (room7.Number != 0 && room8.Number == 0 && room9.Number == 0 && room1.Number == 0 && room4.Number == 0)
+            {
+                RoomAlone = true;
+            }
+            if (room8.Number != 0 && room7.Number == 0 && room9.Number == 0 && room2.Number == 0 && room5.Number == 0)
+            {
+                RoomAlone = true;
+            }
+            if (room9.Number != 0 && room7.Number == 0 && room8.Number == 0 && room6.Number == 0 && room3.Number == 0)
+            {
+                RoomAlone = true;
+            }
+
+
+
+            return RoomAlone;
+        }
+
         public void CreateHallways()
         {
             Room room1 = (Room)rooms[0, 0];
@@ -186,6 +247,18 @@ namespace Arena.MapGenerator
             Room room8 = (Room)rooms[2, 1];
             Room room9 = (Room)rooms[2, 2];
 
+            // create L hallways
+            // 1 - -
+            // - 5 6
+            // - 8 9
+            // connect 1 to 5
+
+            //todo create a L hallway method
+
+
+
+
+            // create horizontal hallways
             if (room1.Number != 0 && room2.Number != 0)
             {
                 CreateHorizontalHallways(0, 0, 0, 1);
@@ -695,14 +768,14 @@ namespace Arena.MapGenerator
                     }
 
                     //disabled for being slow
-                    //POV(plX, plY); 
-                    
+                    //POV(plX, plY);
+
                 }
             }
         }
 
         //! this is horribly slow
-        public void POV(int posX, int posY) 
+        public void POV(int posX, int posY)
         {
             Tile CurrentTile = (Tile)GameMap[posX, posY];
             string _icon = CurrentTile.Icon;

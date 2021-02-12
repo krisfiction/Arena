@@ -34,14 +34,20 @@ namespace Arena
             map.FillRooms();
 
             //create 1 room or create entire map
-            map.CreateOneRoom();
-            //map.Create();
+            //map.CreateOneRoom();
+            map.Create();
 
             // make at least 4 rooms
-            //if (map.NumberOfRooms < 4)
-            //{
-            //    Main();
-            //}
+            if (map.NumberOfRooms < 4)
+            {
+                Main();
+            }
+
+            if (map.CheckLoneRooms())
+            {
+                Main();
+            }
+
 
             map.CreateHallways();
 
