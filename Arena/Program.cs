@@ -40,11 +40,13 @@ namespace Arena
             // make at least 4 rooms
             if (map.NumberOfRooms < 4)
             {
+                map.Reset();
                 Main();
             }
 
             if (map.CheckLoneRooms())
             {
+                map.Reset();
                 Main();
             }
 
@@ -131,6 +133,7 @@ namespace Arena
                 if (aInput == ConsoleKey.F5) //reload for testing
                 {
                     ActivityLog.ClearLog();
+                    map.Reset();
                     Main();
                 }
 

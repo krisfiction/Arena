@@ -29,9 +29,18 @@ namespace Arena.MapGenerator
 
         private readonly Room[,] rooms = new Room[3, 3];
 
-        private int RoomNumber = 1;
+        //private int RoomNumber = 1;
 
         public int NumberOfRooms = 0;
+
+
+        public void Reset()
+        {
+            NumberOfRooms = 0;
+            GameMap.Initialize();
+            rooms.Initialize();
+        }
+
 
         public void CreateOneRoom() //create 1 room for testing
         {
@@ -705,7 +714,7 @@ namespace Arena.MapGenerator
                 }
             }
 
-            RoomNumber++;
+            //RoomNumber++;
         }
 
         public void FillMap()
