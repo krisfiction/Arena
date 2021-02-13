@@ -38,7 +38,7 @@ namespace Arena
             map.Create();
 
             // make at least 4 rooms
-            if (map.NumberOfRooms < 4)
+            if (map.NumberOfRooms < 4 && map.NumberOfHallways < 3)
             {
                 map.Reset();
                 Main();

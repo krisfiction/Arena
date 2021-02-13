@@ -32,11 +32,14 @@ namespace Arena.MapGenerator
         //private int RoomNumber = 1;
 
         public int NumberOfRooms = 0;
+        public int NumberOfHallways = 0;
+
 
 
         public void Reset()
         {
             NumberOfRooms = 0;
+            NumberOfHallways = 0;
             GameMap.Initialize();
             rooms.Initialize();
         }
@@ -236,8 +239,6 @@ namespace Arena.MapGenerator
             {
                 RoomAlone = true;
             }
-
-
 
             return RoomAlone;
         }
@@ -502,6 +503,7 @@ namespace Arena.MapGenerator
                     }
                 }
             }
+            NumberOfHallways++;
         }
 
         //! connecting room 2 [0, 1] to room 3 [0, 2]
@@ -669,6 +671,7 @@ namespace Arena.MapGenerator
                     }
                 }
             }
+            NumberOfHallways++;
         }
 
         public void CreateRoom(int RoomPOSX, int RoomPOSY, int RoomHeight, int RoomWidth)
