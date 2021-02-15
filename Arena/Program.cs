@@ -28,30 +28,8 @@ namespace Arena
             Console.CursorVisible = false; //to hide the cursor
             Console.Clear();
 
-            // Map map = new Map();
+            map.Build();
 
-            map.FillMap();
-            map.FillRooms();
-
-            //create 1 room or create entire map
-            //map.CreateOneRoom();
-            map.Create();
-
-            // make at least 4 rooms
-            if (map.NumberOfRooms < 4 && map.NumberOfHallways < 3)
-            {
-                map.Reset();
-                Main();
-            }
-
-            if (map.CheckLoneRooms())
-            {
-                map.Reset();
-                Main();
-            }
-
-
-            map.CreateHallways();
 
             Player player = new Player
             {
@@ -60,6 +38,11 @@ namespace Arena
                 Health = 100
             };
             map.PlacePlayer(player);
+
+
+            ActivityLog.AddToLog($"Rooms: {map.NumberOfRooms}");
+            ActivityLog.AddToLog($"Halls: {map.NumberOfHallways}");
+
 
             //Potion potion = new Potion();
             //potion.Cast();

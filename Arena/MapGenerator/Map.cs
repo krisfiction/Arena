@@ -34,7 +34,25 @@ namespace Arena.MapGenerator
         public int NumberOfRooms = 0;
         public int NumberOfHallways = 0;
 
+        public void Build()
+        {
+            FillMap();
+            FillRooms();
+            Create();
+            CreateHallways();
 
+            if (CheckLoneRooms())
+            {
+                Reset();
+                Build();
+            }
+
+            if (NumberOfRooms < 4 || NumberOfHallways < 3)
+            {
+                Reset();
+                Build();
+            }
+        }
 
         public void Reset()
         {
@@ -182,6 +200,16 @@ namespace Arena.MapGenerator
                 rooms[2, 2] = new Room(9, RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
                 CreateRoom(RoomPOSX, RoomPOSY, RoomHeight, RoomWidth);
             }
+
+
+
+            //if (NumberOfRooms < 4 && NumberOfHallways < 3)
+            //{
+            //    Reset();
+            //    Program.Main();
+            //}
+
+
         }
 
 
@@ -503,6 +531,7 @@ namespace Arena.MapGenerator
                     }
                 }
             }
+            
             NumberOfHallways++;
         }
 
@@ -671,6 +700,7 @@ namespace Arena.MapGenerator
                     }
                 }
             }
+            
             NumberOfHallways++;
         }
 
